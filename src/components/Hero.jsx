@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import FinanceAssumptions from "./FinanceAssumptions";
-import { formatCad, getCarEstimatedMonthly } from "../utils/finance";
+import { formatCad } from "../utils/finance";
 
 export default function Hero({
   onViewChange,
   currentView,
   cars,
-  filteredCars,
+  filteredGroups = [],
   financeAssumptions,
   onFinanceChange,
 }) {
@@ -15,8 +15,8 @@ export default function Hero({
 
   const stats = useMemo(() => {
     const confirmed = cars.filter((c) => c.dataConfirmed).length;
-    const monthlies = filteredCars
-      .map((c) => getCarEstimatedMonthly(c, financeAssumptions))
+    const monthlies = filteredGroups
+      .map((g) => g.monthlyMin)
       .filter((m) => m != null);
     const aprs = cars.map((c) => c.apr).filter((a) => a != null);
     return {
@@ -26,7 +26,7 @@ export default function Hero({
       bestRange: Math.max(...cars.map((c) => c.range)),
       bestApr: aprs.length ? Math.min(...aprs) : null,
     };
-  }, [cars, filteredCars, financeAssumptions]);
+  }, [cars, filteredGroups, financeAssumptions]);
 
   const { downPayment, tradeIn, loanTermYears } = financeAssumptions;
 

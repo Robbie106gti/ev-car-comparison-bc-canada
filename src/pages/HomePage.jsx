@@ -8,6 +8,30 @@ import CarDetailModal from "../components/CarDetailModal";
 import Hero from "../components/Hero";
 import FinanceCalculator from "../components/FinanceCalculator";
 import { DEFAULT_FINANCE, getCarEstimatedMonthly } from "../utils/finance";
+import {
+  groupCarsByModel,
+  sortModelGroups,
+  getCompareVariant,
+  isGroupInCompare,
+} from "../utils/groupByModel";
+
+function carPassesFilters(car, filters, financeAssumptions) {
+  if (filters.make !== "All" && car.make !== filters.make) return false;
+  if (filters.drivetrain !== "All" && car.drivetrain !== filters.drivetrain) return false;
+  if (filters.sunroof && car.sunroof !== true) return false;
+  if (filters.heatedSeats && car.heatedSeats !== true) return false;
+  if (filters.ventilatedSeats && car.ventilatedSeats !== true) return false;
+  if (filters.heatedSteeringWheel && car.heatedSteeringWheel !== true) return false;
+  if (filters.backupCamera && car.backupCamera !== true) return false;
+  if (filters.parkingSensors && car.parkingSensors !== true) return false;
+  if (filters.rebateOnly && !(car.federalRebate > 0)) return false;
+  if (filters.confirmedOnly && !car.dataConfirmed) return false;
+  if (filters.maxMonthly < 1500) {
+    const monthly = getCarEstimatedMonthly(car, financeAssumptions);
+    if (monthly == null || monthly > filters.maxMonthly) return false;
+  }
+  return true;
+}
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +42,43 @@ export default function HomePage() {
   const [view, setView] = useState("grid");
   const [financeAssumptions, setFinanceAssumptions] = useState({ ...DEFAULT_FINANCE });
   const [selectedCar, setSelectedCar] = useState(null);
+
+  const allGroups = useMemo(
+    () => groupCarsByModel(cars, financeAssumptions),
+    [financeAssumptions]
+  );
+
+  const matchingCarIds = useMemo(() => {
+    const ids = new Set();
+    for (const car of cars) {
+      if (carPassesFilters(car, filters, financeAssumptions)) ids.add(car.id);
+    }
+    return ids;
+  }, [filters, financeAssumptions]);
+
+  const filteredGroups = useMemo(() => {
+    const visible = allGroups.filter((g) =>
+      g.variants.some((v) => matchingCarIds.has(v.id))
+    );
+    return sortModelGroups(visible, filters.sortBy, financeAssumptions);
+  }, [allGroups, matchingCarIds, filters.sortBy, financeAssumptions]);
+
+  const hasActiveFilters = useMemo(() => {
+    const d = DEFAULT_FILTERS;
+    return (
+      filters.make !== d.make ||
+      filters.drivetrain !== d.drivetrain ||
+      filters.sunroof ||
+      filters.heatedSeats ||
+      filters.ventilatedSeats ||
+      filters.heatedSteeringWheel ||
+      filters.backupCamera ||
+      filters.parkingSensors ||
+      filters.rebateOnly ||
+      filters.confirmedOnly ||
+      filters.maxMonthly < d.maxMonthly
+    );
+  }, [filters]);
 
   useEffect(() => {
     const carId = searchParams.get("car");
@@ -35,49 +96,20 @@ export default function HomePage() {
     }
   }, [searchParams, setSearchParams]);
 
-  const filtered = useMemo(() => {
-    let list = [...cars];
-    if (filters.make !== "All") list = list.filter(c => c.make === filters.make);
-    if (filters.drivetrain !== "All") list = list.filter(c => c.drivetrain === filters.drivetrain);
-    if (filters.sunroof) list = list.filter(c => c.sunroof === true);
-    if (filters.heatedSeats) list = list.filter(c => c.heatedSeats === true);
-    if (filters.ventilatedSeats) list = list.filter(c => c.ventilatedSeats === true);
-    if (filters.heatedSteeringWheel) list = list.filter(c => c.heatedSteeringWheel === true);
-    if (filters.backupCamera) list = list.filter(c => c.backupCamera === true);
-    if (filters.parkingSensors) list = list.filter(c => c.parkingSensors === true);
-    if (filters.rebateOnly) list = list.filter(c => c.federalRebate > 0);
-    if (filters.confirmedOnly) list = list.filter(c => c.dataConfirmed);
-    if (filters.maxMonthly < 1500) {
-      list = list.filter(c => {
-        const monthly = getCarEstimatedMonthly(c, financeAssumptions);
-        return monthly != null && monthly <= filters.maxMonthly;
-      });
-    }
-    list.sort((a, b) => {
-      if (filters.sortBy === "monthly") {
-        const ma = getCarEstimatedMonthly(a, financeAssumptions);
-        const mb = getCarEstimatedMonthly(b, financeAssumptions);
-        if (ma == null) return 1;
-        if (mb == null) return -1;
-        return ma - mb;
-      }
-      if (filters.sortBy === "range") return b.range - a.range;
-      if (filters.sortBy === "msrp") return a.msrp - b.msrp;
-      if (filters.sortBy === "apr") return (a.apr ?? 99) - (b.apr ?? 99);
-      return 0;
-    });
-    return list;
-  }, [filters, financeAssumptions]);
-
   const toggleCompare = (car) => {
-    setCompareList(prev =>
-      prev.find(c => c.id === car.id)
-        ? prev.filter(c => c.id !== car.id)
-        : prev.length < 4 ? [...prev, car] : prev
+    setCompareList((prev) =>
+      prev.find((c) => c.id === car.id)
+        ? prev.filter((c) => c.id !== car.id)
+        : prev.length < 4
+          ? [...prev, car]
+          : prev
     );
   };
 
-  const openCalc = (car) => { setCalcCar(car); setView("calc"); };
+  const openCalc = (car) => {
+    setCalcCar(car);
+    setView("calc");
+  };
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -85,7 +117,7 @@ export default function HomePage() {
         onViewChange={setView}
         currentView={view}
         cars={cars}
-        filteredCars={filtered}
+        filteredGroups={filteredGroups}
         financeAssumptions={financeAssumptions}
         onFinanceChange={setFinanceAssumptions}
       />
@@ -95,22 +127,31 @@ export default function HomePage() {
           <div className="py-6">
             <div className="mb-6">
               <div className="flex items-center gap-4 mb-4">
-                <button onClick={() => setView("grid")}
-                  className="text-zinc-500 hover:text-white text-sm flex items-center gap-1.5 transition-colors">
+                <button
+                  onClick={() => setView("grid")}
+                  className="text-zinc-500 hover:text-white text-sm flex items-center gap-1.5 transition-colors"
+                >
                   ← Back to cars
                 </button>
-                <h2 className="text-xl font-bold" style={{ fontFamily: "'Syne', sans-serif" }}>Finance Calculator</h2>
+                <h2 className="text-xl font-bold" style={{ fontFamily: "'Syne', sans-serif" }}>
+                  Finance Calculator
+                </h2>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button onClick={() => setCalcCar(null)}
+                <button
+                  onClick={() => setCalcCar(null)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all
-                    ${!calcCar ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}>
+                    ${!calcCar ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}
+                >
                   Generic
                 </button>
-                {cars.filter(c => c.dataConfirmed).map(c => (
-                  <button key={c.id} onClick={() => setCalcCar(c)}
+                {cars.filter((c) => c.dataConfirmed).map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => setCalcCar(c)}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all
-                      ${calcCar?.id === c.id ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}>
+                      ${calcCar?.id === c.id ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}
+                  >
                     {c.make} {c.model} {c.trim}
                   </button>
                 ))}
@@ -125,33 +166,55 @@ export default function HomePage() {
               setFilters={setFilters}
               makes={makes}
               drivetrains={drivetrains}
-              resultCount={filtered.length}
+              resultCount={filteredGroups.length}
             />
             <div className="mt-3 mb-6 flex items-center justify-end">
               {compareList.length > 0 && (
-                <button onClick={() => setCompareOpen(true)}
-                  className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-4 py-2 rounded-full text-sm transition-all">
+                <button
+                  onClick={() => setCompareOpen(true)}
+                  className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-4 py-2 rounded-full text-sm transition-all"
+                >
                   Compare {compareList.length} car{compareList.length > 1 ? "s" : ""}
                 </button>
               )}
             </div>
-            {filtered.length === 0 ? (
+            {filteredGroups.length === 0 ? (
               <div className="text-center py-24 text-zinc-600">
                 <p className="text-2xl mb-2">No cars match</p>
                 <p className="text-sm">Try adjusting your filters</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {filtered.map(car => (
-                  <CarCard key={car.id} car={car}
-                    financeAssumptions={financeAssumptions}
-                    inCompare={!!compareList.find(c => c.id === car.id)}
-                    onToggleCompare={() => toggleCompare(car)}
-                    compareDisabled={compareList.length >= 4 && !compareList.find(c => c.id === car.id)}
-                    onOpenCalc={() => openCalc(car)}
-                    onSelect={() => setSelectedCar(car)}
-                  />
-                ))}
+                {filteredGroups.map((group) => {
+                  const compareCar = getCompareVariant(group);
+                  const matchCount = group.variants.filter((v) =>
+                    matchingCarIds.has(v.id)
+                  ).length;
+                  const filterMatchLabel =
+                    hasActiveFilters &&
+                    matchCount < group.variantCount &&
+                    matchCount > 0
+                      ? `${matchCount} of ${group.variantCount} trims match`
+                      : null;
+
+                  return (
+                    <CarCard
+                      key={group.key}
+                      modelGroup={group}
+                      car={compareCar}
+                      financeAssumptions={financeAssumptions}
+                      inCompare={isGroupInCompare(group, compareList)}
+                      onToggleCompare={() => toggleCompare(compareCar)}
+                      compareDisabled={
+                        compareList.length >= 4 &&
+                        !compareList.find((c) => c.id === compareCar.id)
+                      }
+                      onOpenCalc={() => openCalc(compareCar)}
+                      onSelect={() => setSelectedCar(compareCar)}
+                      filterMatchLabel={filterMatchLabel}
+                    />
+                  );
+                })}
               </div>
             )}
           </>
@@ -175,15 +238,24 @@ export default function HomePage() {
       )}
 
       {compareOpen && (
-        <CompareDrawer cars={compareList} onClose={() => setCompareOpen(false)}
+        <CompareDrawer
+          cars={compareList}
+          onClose={() => setCompareOpen(false)}
           financeAssumptions={financeAssumptions}
-          onRemove={(id) => setCompareList(prev => prev.filter(c => c.id !== id))} />
+          onRemove={(id) => setCompareList((prev) => prev.filter((c) => c.id !== id))}
+        />
       )}
       {compareList.length > 0 && !compareOpen && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-          <button onClick={() => setCompareOpen(true)}
-            className="flex items-center gap-3 bg-zinc-900 border border-zinc-700 hover:border-emerald-500 px-6 py-3 rounded-full shadow-2xl transition-all text-sm font-medium">
-            <span className="flex gap-1">{compareList.map(c => <span key={c.id} className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />)}</span>
+          <button
+            onClick={() => setCompareOpen(true)}
+            className="flex items-center gap-3 bg-zinc-900 border border-zinc-700 hover:border-emerald-500 px-6 py-3 rounded-full shadow-2xl transition-all text-sm font-medium"
+          >
+            <span className="flex gap-1">
+              {compareList.map((c) => (
+                <span key={c.id} className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+              ))}
+            </span>
             Compare {compareList.length} selected
           </button>
         </div>
