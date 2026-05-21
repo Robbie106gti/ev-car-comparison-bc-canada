@@ -2,6 +2,17 @@
  * Exterior paint options per car (trim-specific where Canada config differs).
  * hex = approximate swatch; verify on manufacturer build tool before ordering.
  */
+
+/** Volkswagen ID.4 (2025/2026 Canada) — shared across trims */
+const ID4_COLORS = [
+  { name: "Glacier White Metallic", hex: "#e6e8ea" },
+  { name: "Moonstone Grey Metallic", hex: "#6a7078" },
+  { name: "Kings Red Metallic", hex: "#6e2028" },
+  { name: "Deep Black Pearl", hex: "#1c1e20" },
+  { name: "Scale Silver Metallic", hex: "#a8acb0" },
+  { name: "Grenadilla Black Metallic", hex: "#2a2c30" },
+];
+
 export const colorsByCarId = {
   1: [
     { name: "Gelato White", hex: "#f4f1ea" },
@@ -156,21 +167,11 @@ export const colorsByCarId = {
     { name: "Glacier White Pearl", hex: "#e8ecf0" },
     { name: "Nebular Blue", hex: "#2a5a8f" },
   ],
-  12: [
-    { name: "Glacier White Metallic", hex: "#e6e8ea" },
-    { name: "Moonstone Grey Metallic", hex: "#6a7078" },
-    { name: "Kings Red Metallic", hex: "#6e2028" },
-    { name: "Deep Black Pearl", hex: "#1c1e20" },
-    { name: "Scale Silver Metallic", hex: "#a8acb0" },
-  ],
-  13: [
-    { name: "Glacier White Metallic", hex: "#e6e8ea" },
-    { name: "Moonstone Grey Metallic", hex: "#6a7078" },
-    { name: "Kings Red Metallic", hex: "#6e2028" },
-    { name: "Deep Black Pearl", hex: "#1c1e20" },
-    { name: "Scale Silver Metallic", hex: "#a8acb0" },
-    { name: "Grenadilla Black Metallic", hex: "#2a2c30" },
-  ],
+  12: ID4_COLORS,
+  13: ID4_COLORS,
+  44: ID4_COLORS,
+  45: ID4_COLORS,
+  46: ID4_COLORS,
   14: [
     { name: "Candy White", hex: "#f0efe8" },
     { name: "Silver Metallic", hex: "#b4b8bc" },
