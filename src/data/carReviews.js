@@ -246,4 +246,38 @@ export const carReviews = {
       "Transport Canada recall WRD-25",
     ],
   },
+
+  "MINI Countryman": {
+    ownerSentiment:
+      "2025 SE ALL4 is new in Canada — early impressions focus on premium feel and MINI character in a larger SUV body.",
+    kbbConsumerRating: "Limited early reviews",
+    consumerReportsReliability: "Not yet rated — too new",
+    pros: [
+      "313 hp dual-motor AWD — quick for a premium compact SUV",
+      "Panoramic moonroof standard on all trims",
+      "Heated front seats + heated steering wheel on every trim",
+      "Distinctive MINI styling and upscale cabin (especially Favoured interior)",
+      "341 km NRC range on 18\" wheels — reasonable for the segment",
+      "460 L cargo — practical for a 'premium compact' footprint",
+    ],
+    cons: [
+      "No $5K federal EV rebate — all trims over the MSRP cap",
+      "CCS2 only (~130 kW DC) — not NACS; plan charging accordingly in BC",
+      "No heated rear seats or ventilated seats on any trim",
+      "Premier+ pricing (~$67–69K all-in) is steep vs rebate-eligible rivals",
+      "DC fast-charge speed modest vs newer 800V platforms",
+      "Very new — limited Canadian owner reliability data",
+    ],
+    recalls: [],
+    ownerQuotes: [],
+    canadianNotes:
+      "2025 Canada: SE ALL4 in Premier and Premier+ lines, each with Classic or Favoured interior (+$2K). All-in pricing from ~$60K (Premier Classic) to ~$69K (Premier+ Favoured). Verify dealer freight/doc fees against mini.ca build tool. MINI Vancouver and other dealers may quote higher all-inclusive totals.",
+    reliabilityNotes:
+      "First model year of electric Countryman in Canada — treat as early-adopter until long-term data exists. Shared BMW Group EV hardware; monitor BMW/MINI service bulletins.",
+    sources: [
+      "mini.ca Countryman Electric specs",
+      "NRCan fuel consumption ratings",
+      "User-provided 2025 MINI Canada guide",
+    ],
+  },
 };

@@ -29,6 +29,7 @@ export const imageConfigByKey = {
   "BMW|i4": { imageMake: "bmw", imageModel: "i4", imageModelVariant: "sedan" },
   "Audi|Q4 e-tron": { imageMake: "audi", imageModel: "q4", imageModelVariant: "suv" },
   "Genesis|GV60": { imageMake: "genesis", imageModel: "gv60", imageModelVariant: "suv" },
+  "MINI|Countryman": { imageMake: "mini", imageModel: "countryman", imageModelVariant: "suv" },
 };
 
 /** Per-trim CDN hints (ML-mapped; approximate for Canada-only names). */
@@ -60,6 +61,10 @@ export const imageConfigByCarId = {
   24: { imageTrim: "40" },
   25: { imageTrim: "standard" },
   26: { imageTrim: "standard" },
+  28: { imageTrim: "se-all4-premier" },
+  29: { imageTrim: "se-all4-premier-favoured" },
+  30: { imageTrim: "se-all4-premier-plus" },
+  31: { imageTrim: "se-all4-premier-plus-favoured" },
 };
 
 export function getImageConfig(car) {
