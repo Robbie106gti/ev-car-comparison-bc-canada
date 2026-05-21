@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { getCarImageUrl } from "../utils/carImage";
 
+/** Only verified binary images — never commit HTML/error pages from curl downloads. */
 const LOCAL_IMAGES = {
-  "Subaru|Uncharted": "/cars/subaru-uncharted.jpg",
-  "Hyundai|IONIQ 5": "/cars/hyundai-ioniq5.jpg",
+  "Tesla|Model 3": "/cars/tesla-model-3.jpg",
 };
 
 export default function CarImage({ car, className = "" }) {
-  const [src, setSrc] = useState(() => {
-    const local = LOCAL_IMAGES[`${car.make}|${car.model}`];
-    return local ?? getCarImageUrl(car);
-  });
+  const local = LOCAL_IMAGES[`${car.make}|${car.model}`];
+  const [src, setSrc] = useState(() => local ?? getCarImageUrl(car));
   const [failed, setFailed] = useState(false);
 
   const handleError = () => {
-    const local = LOCAL_IMAGES[`${car.make}|${car.model}`];
     if (local && src !== getCarImageUrl(car)) {
       setSrc(getCarImageUrl(car));
       return;
