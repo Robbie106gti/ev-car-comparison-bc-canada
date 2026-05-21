@@ -14,6 +14,12 @@ export const imageConfigByKey = {
     imageModelVariant: "suv",
     imagePowerTrain: "electric",
   },
+  "Toyota|C-HR": {
+    imageMake: "toyota",
+    imageModel: "c-hr",
+    imageModelVariant: "suv",
+    imagePowerTrain: "electric",
+  },
   "Volkswagen|ID.4": { imageMake: "volkswagen", imageModel: "id.4", imageModelVariant: "suv" },
   "Volkswagen|ID. Buzz": { imageMake: "volkswagen", imageModel: "id-buzz", imageModelVariant: "mpv" },
   "Hyundai|IONIQ 5": { imageMake: "hyundai", imageModel: "ioniq5", imageModelVariant: "suv" },
@@ -67,6 +73,9 @@ export const imageConfigByCarId = {
   29: { imageTrim: "se-all4-premier-favoured" },
   30: { imageTrim: "se-all4-premier-plus" },
   31: { imageTrim: "se-all4-premier-plus-favoured" },
+  34: { imageTrim: "se-fwd", imagePaintDescription: "tandoori" },
+  35: { imageTrim: "xse-awd", imagePaintDescription: "tandoori" },
+  36: { imageTrim: "xse-premium-awd", imagePaintDescription: "tandoori" },
 };
 
 export function getImageConfig(car) {

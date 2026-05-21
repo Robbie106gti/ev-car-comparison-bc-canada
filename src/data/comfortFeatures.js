@@ -37,6 +37,9 @@ export const comfortByCarId = {
   29: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
   30: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
   31: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
+  34: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
+  35: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
+  36: { heatedSeats: true, heatedSeatsDetail: "front + rear", ventilatedSeats: false, heatedSteeringWheel: true },
 };
 
 const defaults = {

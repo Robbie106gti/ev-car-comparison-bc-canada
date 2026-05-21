@@ -25,6 +25,9 @@ const REVIEW_KEY_BY_ID = {
   20: "Tesla Model Y",
   32: "Tesla Model Y",
   33: "Tesla Model Y",
+  34: "Toyota C-HR",
+  35: "Toyota C-HR",
+  36: "Toyota C-HR",
 };
 
 const ID_BUZZ_IDS = new Set([14, 15]);
@@ -389,6 +392,37 @@ const rawCars = [
     tags: ["suv", "awd", "premium", "no-rebate", "ccs2", "sunroof"],
     notes: "Top spec: Premier+ luxury + Favoured interior. ~$68,990 all-in. 360° camera, HUD, Harman Kardon. CCS2; no federal rebate.",
     url: "https://www.mini.ca/en/models/countryman-electric",
+  },
+  {
+    id: 34, make: "Toyota", model: "C-HR", trim: "SE FWD", year: 2026,
+    drivetrain: "FWD", msrp: 44900, dealerDiscount: 0, federalRebate: 5000,
+    totalAfterIncentives: 42986, monthlyPayment: null, apr: null, loanTerm: 60,
+    downPayment: 5000, tradeIn: 8000, range: 496, sunroof: false,
+    dataConfirmed: false, seats: 5, cargo: 720,
+    tags: ["suv", "nacs", "rebate-eligible", "coupe-crossover", "fwd", "long-range"],
+    notes: "Uncharted platform cousin (eTNGA). NACS port. Monotone paint palette on SE. ~$47,986 before tax incl. freight → $42,986 after $5K federal. Toyota stackable promos may apply — verify dealer. Drive Connect subscription for some connected features after trial.",
+    url: "https://www.toyota.ca/en/vehicles/c-hr/overview",
+  },
+  {
+    id: 35, make: "Toyota", model: "C-HR", trim: "XSE AWD", year: 2026,
+    drivetrain: "AWD", msrp: 49900, dealerDiscount: 0, federalRebate: 5000,
+    totalAfterIncentives: 46986, monthlyPayment: null, apr: null, loanTerm: 60,
+    downPayment: 5000, tradeIn: 8000, range: 452, sunroof: false,
+    dataConfirmed: false, seats: 5, cargo: 720,
+    tags: ["suv", "nacs", "rebate-eligible", "coupe-crossover", "awd"],
+    notes: "Value sweet spot vs Premium: AWD, heated front + wheel, front/rear park assist, still rebate-eligible. ~$52,986 before tax incl. freight → $46,986 after $5K federal. NACS. No sunroof or 360° camera.",
+    url: "https://www.toyota.ca/en/vehicles/c-hr/overview",
+  },
+  {
+    id: 36, make: "Toyota", model: "C-HR", trim: "XSE Premium AWD", year: 2026,
+    drivetrain: "AWD", msrp: 54900, dealerDiscount: 0, federalRebate: 0,
+    totalAfterIncentives: 56986, monthlyPayment: null, apr: null, loanTerm: 60,
+    downPayment: 5000, tradeIn: 8000, range: 438, sunroof: true,
+    sunroofType: "Fixed panoramic moonroof",
+    dataConfirmed: false, seats: 5, cargo: 720,
+    tags: ["suv", "nacs", "coupe-crossover", "awd", "sunroof", "premium"],
+    notes: "Panoramic moonroof, 360° camera, heated rear seats. NO federal rebate (MSRP over $50K cap). ~$56,986 all-in before tax incl. freight. NACS. Drive Connect subscription caveat.",
+    url: "https://www.toyota.ca/en/vehicles/c-hr/overview",
   },
 ];
 

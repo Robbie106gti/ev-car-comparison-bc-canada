@@ -263,6 +263,27 @@ export const colorsByCarId = {
     { name: "British Racing Green IV Metallic", hex: "#2a5a40" },
     { name: "Mocha Metallic", hex: "#6a5048" },
   ],
+  34: [
+    { name: "Tandoori", hex: "#c85a28" },
+    { name: "Overcast", hex: "#8a9098" },
+    { name: "Cement", hex: "#9a9ea4" },
+    { name: "Midnight Black", hex: "#1a1c1e" },
+    { name: "Wind Chill Pearl", hex: "#e8eaec" },
+  ],
+  35: [
+    { name: "Tandoori", hex: "#c85a28" },
+    { name: "Overcast", hex: "#8a9098" },
+    { name: "Cement", hex: "#9a9ea4" },
+    { name: "Midnight Black", hex: "#1a1c1e" },
+    { name: "Wind Chill Pearl", hex: "#e8eaec" },
+  ],
+  36: [
+    { name: "Tandoori", hex: "#c85a28" },
+    { name: "Overcast", hex: "#8a9098" },
+    { name: "Cement", hex: "#9a9ea4" },
+    { name: "Midnight Black", hex: "#1a1c1e" },
+    { name: "Wind Chill Pearl", hex: "#e8eaec" },
+  ],
 };
 
 export function getColorsForCar(car) {

@@ -324,4 +324,45 @@ export const carReviews = {
       "User-provided 2025 MINI Canada guide",
     ],
   },
+
+  "Toyota C-HR": {
+    ownerSentiment:
+      "2026 Canada launch — no long-term owner reviews yet. Early positioning vs Subaru Uncharted (same platform) and Toyota bZ (older, larger SUV).",
+    kbbConsumerRating: "No reviews yet",
+    consumerReportsReliability: "Not yet rated — too new",
+    pros: [
+      "eTNGA platform shared with Subaru Uncharted — proven dual-motor AWD hardware on upper trims",
+      "SE FWD: 496 km NRC — best range in the lineup; rebate-eligible at $44,900 MSRP",
+      "XSE AWD is the recommended sweet spot: AWD, heated front + wheel, park assist, still under rebate cap",
+      "NACS charging port standard — Tesla Supercharger access in BC",
+      "Coupe-crossover styling; 720 L cargo — more usable than bZ for some buyers",
+      "Toyota dealer network and service footprint across BC",
+      "14-inch Toyota Multimedia Plus with wireless CarPlay/Android Auto",
+    ],
+    cons: [
+      "Toyota Drive Connect subscription required after trial for some remote/connected features",
+      "XSE Premium AWD loses $5K federal rebate (MSRP over incentive cap) — pay up for moonroof, 360° cam, heated rear",
+      "No ventilated seats on any trim (Uncharted GT and some rivals offer cooled fronts)",
+      "AWD trims sacrifice range (452 km XSE / 438 km Premium) vs 496 km SE FWD",
+      "Shares HVAC/defroster recall lineage with bZ, Lexus RZ, and Uncharted — confirm fix before winter",
+      "bZ offers more cargo (784 L) if boxy SUV practicality beats coupe looks",
+      "First-year Toyota EV on this platform — reliability unproven despite Toyota ICE reputation",
+      "Gear-selector / infotainment ergonomics similar to Uncharted — easy to confuse controls",
+    ],
+    recalls: [
+      "Shared defroster/HVAC recall with Toyota bZ, Lexus RZ, and Subaru Uncharted (recall WRD-25): HVAC compressor failure can make defroster inoperative. Software fix.",
+    ],
+    ownerQuotes: [],
+    canadianNotes:
+      "2026 Canada: SE FWD ($42,986 after rebate incl. freight), XSE AWD ($46,986), XSE Premium AWD ($56,986, no rebate). Monotone exterior palette on SE (Overcast, Tandoori, Cement, Midnight Black, Wind Chill Pearl). Compare directly to Uncharted FWD LR / Sport AWD — same bones, different badge and Toyota Drive Connect. vs bZ: C-HR is newer coupe-crossover; bZ has more cargo and deeper discount history but weaker owner sentiment.",
+    reliabilityNotes:
+      "No Canadian owner reliability data. Platform is related to bZ4X/Uncharted — monitor WRD-25 defroster recall completion and first-year service bulletins. Toyota ICE reliability does not automatically transfer to first-gen EV volume models.",
+    sources: [
+      "toyota.ca C-HR overview",
+      "NRCan fuel consumption ratings",
+      "Subaru Uncharted / Toyota bZ platform comparisons",
+      "Transport Canada recall WRD-25",
+      "User-provided 2026 Toyota C-HR Canada guide (May 2026)",
+    ],
+  },
 };
