@@ -45,26 +45,38 @@ export default function Hero({
               Real CAD pricing · BC taxes · Payments use your assumptions (
               {formatCad(downPayment)} down, {formatCad(tradeIn)} trade, {loanTermYears} yr)
             </p>
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm">
-              <Link
-                to="/cars"
-                className="text-zinc-500 hover:text-emerald-400 transition-colors"
+            <div className="mt-4">
+              <p className="text-zinc-600 text-xs font-medium uppercase tracking-wider mb-2">
+                Learn more
+              </p>
+              <nav
+                className="flex flex-wrap gap-2"
+                aria-label="Guides and information"
               >
-                Car guide
-              </Link>
-              <Link
-                to="/about"
-                className="text-zinc-500 hover:text-emerald-400 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                to="/evap-rebate"
-                className="text-zinc-500 hover:text-emerald-400 transition-colors"
-              >
-                Federal rebate
-              </Link>
-            </nav>
+                {[
+                  { to: "/cars", title: "Car guide", desc: "Ratings & descriptions" },
+                  { to: "/about", title: "About", desc: "How this site works" },
+                  { to: "/evap-rebate", title: "Federal rebate", desc: "EVAP eligibility" },
+                ].map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="group inline-flex flex-col gap-0.5 px-3 py-2 rounded-lg border border-zinc-700/80 bg-zinc-900/40 text-sm transition-all hover:border-emerald-500/50 hover:bg-zinc-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                  >
+                    <span className="text-zinc-200 font-medium group-hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
+                      {item.title}
+                      <span
+                        className="text-zinc-500 group-hover:text-emerald-400/90 transition-colors text-xs"
+                        aria-hidden
+                      >
+                        →
+                      </span>
+                    </span>
+                    <span className="text-zinc-500 text-xs leading-tight">{item.desc}</span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
 
           <div className="flex flex-col items-end gap-2 shrink-0">
