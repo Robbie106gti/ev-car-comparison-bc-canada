@@ -10,6 +10,7 @@ export default function App() {
   const [filters, setFilters] = useState({
     make: "All", drivetrain: "All", sunroof: false,
     heatedSeats: false, ventilatedSeats: false, heatedSteeringWheel: false,
+    backupCamera: false, parkingSensors: false,
     rebateOnly: false, confirmedOnly: false, maxMonthly: 1500, sortBy: "monthly",
   });
   const [compareList, setCompareList] = useState([]);
@@ -25,6 +26,8 @@ export default function App() {
     if (filters.heatedSeats) list = list.filter(c => c.heatedSeats === true);
     if (filters.ventilatedSeats) list = list.filter(c => c.ventilatedSeats === true);
     if (filters.heatedSteeringWheel) list = list.filter(c => c.heatedSteeringWheel === true);
+    if (filters.backupCamera) list = list.filter(c => c.backupCamera === true);
+    if (filters.parkingSensors) list = list.filter(c => c.parkingSensors === true);
     if (filters.rebateOnly) list = list.filter(c => c.federalRebate > 0);
     if (filters.confirmedOnly) list = list.filter(c => c.dataConfirmed);
     if (filters.maxMonthly < 1500) list = list.filter(c => c.monthlyPayment && c.monthlyPayment <= filters.maxMonthly);

@@ -1,6 +1,7 @@
 import CarImage from "./CarImage";
 import ColorSwatches from "./ColorSwatches";
 import { formatComfort } from "../data/comfortFeatures";
+import { formatSafety } from "../data/safetyFeatures";
 
 const fmt = (n) => (n != null ? `$${Number(n).toLocaleString()}` : "—");
 
@@ -18,6 +19,8 @@ const rows = [
   { label: "Heated seats", key: "heatedSeats", fmt: (v, car) => formatComfort(v, car?.heatedSeatsDetail) },
   { label: "Ventilated seats", key: "ventilatedSeats", fmt: (v, car) => formatComfort(v, car?.ventilatedSeatsDetail) },
   { label: "Heated steering", key: "heatedSteeringWheel", fmt: (v) => formatComfort(v) },
+  { label: "Backup camera", key: "backupCamera", fmt: (v) => formatSafety(v) },
+  { label: "Parking sensors", key: "parkingSensors", fmt: (v, car) => formatSafety(v, car?.parkingSensorsDetail) },
   { label: "Seats", key: "seats", fmt: (v) => v ? `${v}` : "—" },
   { label: "Confirmed", key: "dataConfirmed", fmt: (v) => v ? "✓ Confirmed" : "Estimated" },
 ];

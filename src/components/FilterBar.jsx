@@ -54,6 +54,8 @@ export default function FilterBar({ filters, setFilters, makes, drivetrains }) {
           { key: "heatedSeats", label: "🔥 Heated seats" },
           { key: "ventilatedSeats", label: "❄ Ventilated" },
           { key: "heatedSteeringWheel", label: "◎ Heated wheel" },
+          { key: "backupCamera", label: "📷 Backup cam" },
+          { key: "parkingSensors", label: "📡 Park sensors" },
           { key: "rebateOnly", label: "$ Rebate eligible" },
           { key: "confirmedOnly", label: "✓ Confirmed prices" },
         ].map(t => (

@@ -1,6 +1,7 @@
 import CarImage from "./CarImage";
 import ColorSwatches from "./ColorSwatches";
 import ComfortBadges from "./ComfortBadges";
+import SafetyBadges from "./SafetyBadges";
 
 export default function CarCard({ car, inCompare, onToggleCompare, compareDisabled, onOpenCalc }) {
   const fmt = (n) => n ? `$${n.toLocaleString()}` : "—";
@@ -44,6 +45,11 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
       <div className="px-4 py-3 border-b border-zinc-800">
         <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider mb-2">Comfort</p>
         <ComfortBadges car={car} />
+      </div>
+
+      <div className="px-4 py-3 border-b border-zinc-800">
+        <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider mb-2">Safety</p>
+        <SafetyBadges car={car} />
       </div>
 
       <div className="px-4 py-3 border-b border-zinc-800">
