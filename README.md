@@ -2,6 +2,11 @@
 
 A filterable, side-by-side EV comparison tool for BC Canada shoppers. All pricing in CAD with real confirmed monthly payments from manufacturer build tools.
 
+## Live app
+
+- **Production:** https://ev-compare-five.vercel.app
+- **Source:** https://github.com/Robbie106gti/ev-car-comparison-bc-canada
+
 ## Assumptions
 - $5,000 down payment
 - $8,000 trade-in value
