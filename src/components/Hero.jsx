@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import FinanceAssumptions from "./FinanceAssumptions";
 import { formatCad, getCarEstimatedMonthly } from "../utils/finance";
 
@@ -46,6 +47,12 @@ export default function Hero({
 
           <div className="flex flex-col sm:flex-row items-end sm:items-start gap-3 shrink-0">
             <FinanceAssumptions assumptions={financeAssumptions} onChange={onFinanceChange} />
+            <Link
+              to="/evap-rebate"
+              className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700/80"
+            >
+              Federal rebate
+            </Link>
             <div className="flex gap-2">
               {[
                 { id: "grid", label: "🚗 Cars" },
