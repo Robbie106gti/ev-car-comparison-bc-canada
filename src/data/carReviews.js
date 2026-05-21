@@ -247,6 +247,50 @@ export const carReviews = {
     ],
   },
 
+  "Tesla Model Y": {
+    ownerSentiment:
+      "Polarized — Supercharger convenience and OTA updates praised; touchscreen-only controls, service experience, and Musk factor divide BC buyers",
+    kbbConsumerRating: "Mixed — strong product, inconsistent service stories",
+    consumerReportsReliability: "Average for Tesla — panel gaps and early-build QC complaints common",
+    pros: [
+      "542 km NRC range on Premium AWD — class-leading for non-luxury EV SUVs",
+      "NACS + Supercharger network — most reliable DC fast charging in BC, no adapter",
+      "OTA updates — features and efficiency improve after purchase",
+      "Autopilot standard — useful on BC highways (driver attention required)",
+      "1,587 kg towing — rare capability at this price",
+      "854 L cargo + frunk; 7-seat option on Premium AWD (+~$3,400)",
+      "Heat pump on 2025+ Juniper refresh — better winter efficiency than older Model Y",
+      "Strong resale in BC; fixed direct pricing — no dealer markup",
+    ],
+    cons: [
+      "Only Standard RWD qualifies for $5K federal EVAP — Premium/Performance over cap",
+      "No physical climate/media/mirror controls — everything on touchscreen",
+      "Panoramic roof has no sunshade — cabin heats up in summer",
+      "Performance trim: firm 21\" ride on rough BC secondary roads; less winter range than Premium",
+      "Panel gaps and paint QC inconsistent — inspect at delivery",
+      "Mixed Tesla service reputation in Canada; no loaners (Uber credit)",
+      "Tariff-driven price volatility in 2025–26 — MSRP has swung dramatically",
+      "Some Metro Vancouver buyers avoiding brand for political reasons (real market factor)",
+      "No AM radio; FSD is supervised only — not autonomous in BC",
+    ],
+    recalls: [],
+    ownerQuotes: [
+      '"Superchargers just work — I plan road trips around them and rarely worry about broken stalls." — BC owner sentiment (forums)',
+      '"Everything is on the screen. Fine until you need to adjust vents while driving." — reviewer/common complaint',
+    ],
+    canadianNotes:
+      "2026 Juniper refresh: Standard RWD $49,990 ($44,990 after $5K rebate), Premium AWD $64,990, Performance $74,990 — verify tesla.com/en_ca. Winter range: Premium ~380–430 km at 0 to -5°C; Standard ~310–360 km; Performance ~340–380 km. BC service: Vancouver, North Van, Richmond, Surrey, Kelowna. Battery precondition via app before winter departures.",
+    reliabilityNotes:
+      "8 yr / 192,000 km powertrain and battery warranty (70% retention). Mobile service for many issues; body-panel parts can take weeks. IIHS not yet rated for 2026 Juniper.",
+    sources: [
+      "tesla.com/en_ca/modely",
+      "NRCan fuel consumption ratings",
+      "Electric Autonomy Canada",
+      "Drive Tesla Canada",
+      "User-provided 2026 Tesla Model Y Canada guide (May 2026)",
+    ],
+  },
+
   "MINI Countryman": {
     ownerSentiment:
       "2025 SE ALL4 is new in Canada — early impressions focus on premium feel and MINI character in a larger SUV body.",
