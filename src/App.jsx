@@ -70,6 +70,7 @@ export default function App() {
         onViewChange={setView}
         currentView={view}
         cars={cars}
+        filteredCars={filtered}
         financeAssumptions={financeAssumptions}
         onFinanceChange={setFinanceAssumptions}
       />

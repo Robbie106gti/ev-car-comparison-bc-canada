@@ -33,17 +33,21 @@ export function getCarEstimatedMonthly(car, { downPayment, tradeIn, loanTermYear
   );
 }
 
+export function financeAssumptionsMatchDefaults({ downPayment, tradeIn, loanTermYears }) {
+  return (
+    downPayment === DEFAULT_FINANCE.downPayment &&
+    tradeIn === DEFAULT_FINANCE.tradeIn &&
+    loanTermMonths(loanTermYears) === loanTermMonths(DEFAULT_FINANCE.loanTermYears)
+  );
+}
+
 /** True when we show a user-driven estimate instead of the stored build-tool payment. */
 export function isEstimatedMonthly(car, assumptions) {
   if (car.apr == null || car.totalAfterIncentives == null) return false;
+  if (!car.dataConfirmed) return true;
   const est = getCarEstimatedMonthly(car, assumptions);
   if (est == null) return false;
-  const months = loanTermMonths(assumptions.loanTermYears);
-  const defaultsMatch =
-    assumptions.downPayment === (car.downPayment ?? DEFAULT_FINANCE.downPayment) &&
-    assumptions.tradeIn === (car.tradeIn ?? DEFAULT_FINANCE.tradeIn) &&
-    months === (car.loanTerm ?? loanTermMonths(DEFAULT_FINANCE.loanTermYears));
-  if (!defaultsMatch) return true;
+  if (!financeAssumptionsMatchDefaults(assumptions)) return true;
   return car.monthlyPayment == null || est !== car.monthlyPayment;
 }
 

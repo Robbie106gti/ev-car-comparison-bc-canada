@@ -6,12 +6,13 @@ export default function Hero({
   onViewChange,
   currentView,
   cars,
+  filteredCars,
   financeAssumptions,
   onFinanceChange,
 }) {
   const stats = useMemo(() => {
     const confirmed = cars.filter((c) => c.dataConfirmed).length;
-    const monthlies = cars
+    const monthlies = filteredCars
       .map((c) => getCarEstimatedMonthly(c, financeAssumptions))
       .filter((m) => m != null);
     const aprs = cars.map((c) => c.apr).filter((a) => a != null);
@@ -22,7 +23,7 @@ export default function Hero({
       bestRange: Math.max(...cars.map((c) => c.range)),
       bestApr: aprs.length ? Math.min(...aprs) : null,
     };
-  }, [cars, financeAssumptions]);
+  }, [cars, filteredCars, financeAssumptions]);
 
   const { downPayment, tradeIn, loanTermYears } = financeAssumptions;
 
