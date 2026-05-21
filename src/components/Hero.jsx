@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import FinanceAssumptions from "./FinanceAssumptions";
 import { formatCad, getCarEstimatedMonthly } from "../utils/finance";
@@ -11,6 +11,8 @@ export default function Hero({
   financeAssumptions,
   onFinanceChange,
 }) {
+  const [financeOpen, setFinanceOpen] = useState(false);
+
   const stats = useMemo(() => {
     const confirmed = cars.filter((c) => c.dataConfirmed).length;
     const monthlies = filteredCars
@@ -65,32 +67,39 @@ export default function Hero({
             </nav>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-end sm:items-start gap-3 shrink-0">
-            <FinanceAssumptions assumptions={financeAssumptions} onChange={onFinanceChange} />
-            <Link
-              to="/cars"
-              className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700/80"
-            >
-              Car guide
-            </Link>
-            <Link
-              to="/evap-rebate"
-              className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700/80"
-            >
-              Federal rebate
-            </Link>
-            <div className="flex gap-2">
-              {[
-                { id: "grid", label: "🚗 Cars" },
-                { id: "calc", label: "🧮 Calculator" },
-              ].map(v => (
-                <button key={v.id} onClick={() => onViewChange(v.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all
-                    ${currentView === v.id ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}>
-                  {v.label}
-                </button>
-              ))}
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setFinanceOpen((o) => !o)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border
+                  ${financeOpen
+                    ? "bg-emerald-500/15 border-emerald-500/50 text-emerald-400"
+                    : "bg-zinc-800/80 border-zinc-700 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200"}`}
+                aria-expanded={financeOpen}
+              >
+                Finance · {formatCad(downPayment)} down
+              </button>
+              <div className="flex gap-2">
+                {[
+                  { id: "grid", label: "🚗 Cars" },
+                  { id: "calc", label: "🧮 Calculator" },
+                ].map(v => (
+                  <button key={v.id} onClick={() => onViewChange(v.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all
+                      ${currentView === v.id ? "bg-emerald-500 text-black" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"}`}>
+                    {v.label}
+                  </button>
+                ))}
+              </div>
             </div>
+            {financeOpen && (
+              <FinanceAssumptions
+                assumptions={financeAssumptions}
+                onChange={onFinanceChange}
+                embedded
+              />
+            )}
           </div>
         </div>
 

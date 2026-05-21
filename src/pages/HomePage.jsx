@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { cars, makes, drivetrains } from "../data/cars";
 import CarCard from "../components/CarCard";
-import FilterBar from "../components/FilterBar";
+import FilterBar, { DEFAULT_FILTERS } from "../components/FilterBar";
 import CompareDrawer from "../components/CompareDrawer";
 import CarDetailModal from "../components/CarDetailModal";
 import Hero from "../components/Hero";
@@ -11,12 +11,7 @@ import { DEFAULT_FINANCE, getCarEstimatedMonthly } from "../utils/finance";
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filters, setFilters] = useState({
-    make: "All", drivetrain: "All", sunroof: false,
-    heatedSeats: false, ventilatedSeats: false, heatedSteeringWheel: false,
-    backupCamera: false, parkingSensors: false,
-    rebateOnly: false, confirmedOnly: false, maxMonthly: 1500, sortBy: "monthly",
-  });
+  const [filters, setFilters] = useState({ ...DEFAULT_FILTERS });
   const [compareList, setCompareList] = useState([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const [calcCar, setCalcCar] = useState(null);
@@ -125,12 +120,14 @@ export default function HomePage() {
           </div>
         ) : (
           <>
-            <FilterBar filters={filters} setFilters={setFilters} makes={makes} drivetrains={drivetrains} />
-            <div className="mt-2 mb-6 flex items-center justify-between">
-              <p className="text-zinc-500 text-sm">
-                <span className="text-white font-medium">{filtered.length}</span> vehicles
-                {filters.confirmedOnly && <span className="ml-2 text-emerald-400 text-xs uppercase tracking-wider font-medium">· confirmed only</span>}
-              </p>
+            <FilterBar
+              filters={filters}
+              setFilters={setFilters}
+              makes={makes}
+              drivetrains={drivetrains}
+              resultCount={filtered.length}
+            />
+            <div className="mt-3 mb-6 flex items-center justify-end">
               {compareList.length > 0 && (
                 <button onClick={() => setCompareOpen(true)}
                   className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-4 py-2 rounded-full text-sm transition-all">

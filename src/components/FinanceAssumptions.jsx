@@ -1,6 +1,6 @@
 import { LOAN_TERM_YEARS } from "../utils/finance";
 
-export default function FinanceAssumptions({ assumptions, onChange }) {
+export default function FinanceAssumptions({ assumptions, onChange, embedded = false }) {
   const { downPayment, tradeIn, loanTermYears } = assumptions;
   const set = (patch) => onChange({ ...assumptions, ...patch });
 
@@ -21,12 +21,15 @@ export default function FinanceAssumptions({ assumptions, onChange }) {
 
   return (
     <div
-      className="rounded-xl border border-zinc-800 bg-zinc-900/90 backdrop-blur-sm p-3 min-w-[220px] max-w-[280px]"
+      className={`rounded-xl border border-zinc-800 bg-zinc-900/90 backdrop-blur-sm p-3 min-w-[220px] max-w-[280px]
+        ${embedded ? "shadow-xl" : ""}`}
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
-      <p className="text-emerald-400 text-[10px] font-semibold uppercase tracking-[0.15em] mb-2">
-        Your finance assumptions
-      </p>
+      {!embedded && (
+        <p className="text-emerald-400 text-[10px] font-semibold uppercase tracking-[0.15em] mb-2">
+          Your finance assumptions
+        </p>
+      )}
 
       <div className="space-y-2.5">
         <div>
