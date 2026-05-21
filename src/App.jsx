@@ -3,6 +3,7 @@ import { cars, makes, drivetrains } from "./data/cars";
 import CarCard from "./components/CarCard";
 import FilterBar from "./components/FilterBar";
 import CompareDrawer from "./components/CompareDrawer";
+import CarDetailModal from "./components/CarDetailModal";
 import Hero from "./components/Hero";
 import FinanceCalculator from "./components/FinanceCalculator";
 import { DEFAULT_FINANCE, getCarEstimatedMonthly } from "./utils/finance";
@@ -19,6 +20,7 @@ export default function App() {
   const [calcCar, setCalcCar] = useState(null);
   const [view, setView] = useState("grid"); // "grid" | "calc"
   const [financeAssumptions, setFinanceAssumptions] = useState({ ...DEFAULT_FINANCE });
+  const [selectedCar, setSelectedCar] = useState(null);
 
   const filtered = useMemo(() => {
     let list = [...cars];
@@ -133,6 +135,7 @@ export default function App() {
                     onToggleCompare={() => toggleCompare(car)}
                     compareDisabled={compareList.length >= 4 && !compareList.find(c => c.id === car.id)}
                     onOpenCalc={() => openCalc(car)}
+                    onSelect={() => setSelectedCar(car)}
                   />
                 ))}
               </div>
@@ -140,6 +143,20 @@ export default function App() {
           </>
         )}
       </div>
+
+      {selectedCar && (
+        <CarDetailModal
+          car={selectedCar}
+          financeAssumptions={financeAssumptions}
+          onClose={() => setSelectedCar(null)}
+          onOpenCalc={() => openCalc(selectedCar)}
+          onToggleCompare={() => toggleCompare(selectedCar)}
+          inCompare={!!compareList.find((c) => c.id === selectedCar.id)}
+          compareDisabled={
+            compareList.length >= 4 && !compareList.find((c) => c.id === selectedCar.id)
+          }
+        />
+      )}
 
       {compareOpen && (
         <CompareDrawer cars={compareList} onClose={() => setCompareOpen(false)}

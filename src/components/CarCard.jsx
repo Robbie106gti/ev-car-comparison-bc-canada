@@ -8,7 +8,16 @@ import {
   loanTermMonths,
 } from "../utils/finance";
 
-export default function CarCard({ car, financeAssumptions, inCompare, onToggleCompare, compareDisabled, onOpenCalc }) {
+export default function CarCard({
+  car,
+  financeAssumptions,
+  inCompare,
+  onToggleCompare,
+  compareDisabled,
+  onOpenCalc,
+  onSelect,
+}) {
+  const stop = (e) => e.stopPropagation();
   const fmt = (n) => n ? `$${n.toLocaleString()}` : "—";
   const rebateEligible = car.federalRebate > 0;
   const displayMonthly = getCarEstimatedMonthly(car, financeAssumptions);
@@ -16,8 +25,19 @@ export default function CarCard({ car, financeAssumptions, inCompare, onToggleCo
   const termMonths = loanTermMonths(financeAssumptions.loanTermYears);
 
   return (
-    <div className={`relative rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col
-      ${inCompare ? "border-emerald-500 bg-zinc-900" : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"}`}>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect?.();
+        }
+      }}
+      className={`relative rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col cursor-pointer
+      ${inCompare ? "border-emerald-500 bg-zinc-900" : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"}`}
+    >
 
       {/* Hero image */}
       <div className="relative h-40 sm:h-44 bg-zinc-950 overflow-hidden">
@@ -115,18 +135,18 @@ export default function CarCard({ car, financeAssumptions, inCompare, onToggleCo
         {car.notes && <span className="text-xs text-zinc-600 italic mt-0.5 w-full truncate">{car.notes}</span>}
       </div>
 
-      <div className="px-4 py-3 flex gap-2 mt-auto">
-        <button onClick={onToggleCompare} disabled={compareDisabled}
+      <div className="px-4 py-3 flex gap-2 mt-auto" onClick={stop}>
+        <button onClick={(e) => { stop(e); onToggleCompare(); }} disabled={compareDisabled}
           className={`flex-1 text-sm font-medium py-2 rounded-xl transition-all
             ${inCompare ? "bg-emerald-500 text-black hover:bg-emerald-400" : compareDisabled ? "bg-zinc-800 text-zinc-600 cursor-not-allowed" : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"}`}>
           {inCompare ? "✓ In compare" : compareDisabled ? "Compare full" : "+ Compare"}
         </button>
-        <button onClick={onOpenCalc}
+        <button onClick={(e) => { stop(e); onOpenCalc(); }}
           className="px-3 py-2 text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 rounded-xl transition-all"
           title="Finance calculator">
           🧮
         </button>
-        <a href={car.url} target="_blank" rel="noopener noreferrer"
+        <a href={car.url} target="_blank" rel="noopener noreferrer" onClick={stop}
           className="px-3 py-2 text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 rounded-xl transition-all">
           →
         </a>

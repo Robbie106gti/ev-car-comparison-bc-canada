@@ -1,7 +1,40 @@
 import { colorsByCarId } from "./carColors";
+import { carReviews } from "./carReviews";
 import { getComfortForCar } from "./comfortFeatures";
 import { getSafetyForCar } from "./safetyFeatures";
 import { getImageConfig } from "./imageConfig";
+
+const REVIEW_KEY_BY_ID = {
+  1: "Fiat 500e",
+  4: "Subaru Uncharted",
+  5: "Subaru Uncharted",
+  6: "Subaru Uncharted",
+  7: "Toyota bZ",
+  8: "Toyota bZ",
+  9: "Toyota bZ",
+  10: "Kia EV6",
+  11: "Kia EV6",
+  12: "Volkswagen ID.4",
+  13: "Volkswagen ID.4",
+  25: "Kia EV9",
+};
+
+const ID_BUZZ_IDS = new Set([14, 15]);
+
+export function getReviewsForCar(car) {
+  if (ID_BUZZ_IDS.has(car.id)) {
+    const base = carReviews["Volkswagen ID.4"];
+    if (!base) return null;
+    return {
+      ...base,
+      reviewsProxyNote:
+        "ID.Buzz is very new in Canada — no owner reviews yet. Content below is proxied from the VW ID.4 / MEB platform (software, recalls, charging).",
+    };
+  }
+  const key = REVIEW_KEY_BY_ID[car.id];
+  if (!key) return null;
+  return carReviews[key] ?? null;
+}
 
 const rawCars = [
   {
@@ -280,6 +313,7 @@ export const cars = rawCars.map((car) => ({
   colors: colorsByCarId[car.id] ?? [],
   ...getComfortForCar(car.id),
   ...getSafetyForCar(car.id),
+  reviews: getReviewsForCar(car),
 }));
 
 export const makes = [...new Set(cars.map(c => c.make))].sort();
