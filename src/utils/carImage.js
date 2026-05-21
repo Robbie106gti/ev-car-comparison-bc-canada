@@ -16,7 +16,7 @@ export function getCarImageUrl(car) {
     make,
     modelFamily,
     powerTrain: car.imagePowerTrain ?? "electric",
-    zoomType: "fullscreen",
+    zoomType: car.imageZoomType ?? "relative",
     angle: car.imageAngle ?? "23",
     width: "640",
     fileType: "webp",

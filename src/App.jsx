@@ -147,8 +147,10 @@ export default function App() {
       {selectedCar && (
         <CarDetailModal
           car={selectedCar}
+          cars={cars}
           financeAssumptions={financeAssumptions}
           onClose={() => setSelectedCar(null)}
+          onSelectCar={setSelectedCar}
           onOpenCalc={() => openCalc(selectedCar)}
           onToggleCompare={() => toggleCompare(selectedCar)}
           inCompare={!!compareList.find((c) => c.id === selectedCar.id)}

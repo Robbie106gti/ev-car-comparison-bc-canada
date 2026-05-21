@@ -39,10 +39,10 @@ export default function CarCard({
       ${inCompare ? "border-emerald-500 bg-zinc-900" : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"}`}
     >
 
-      {/* Hero image */}
-      <div className="relative h-40 sm:h-44 bg-zinc-950 overflow-hidden">
-        <CarImage car={car} className="scale-105 hover:scale-100 transition-transform duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/20 to-transparent pointer-events-none" />
+      {/* Hero image — contain so full side profile stays visible */}
+      <div className="relative aspect-[2/1] min-h-[9.5rem] sm:min-h-[10.5rem] bg-zinc-950 overflow-hidden flex items-center justify-center px-3 py-2">
+        <CarImage car={car} className="max-h-full" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-900/90 via-zinc-900/30 to-transparent pointer-events-none" />
         <div className="absolute top-3 right-3 flex flex-col gap-1 items-end">
           <span className={`text-xs px-2 py-0.5 rounded-full font-medium backdrop-blur-sm
             ${car.drivetrain === "AWD" ? "bg-blue-950/90 text-blue-300" : car.drivetrain === "RWD" ? "bg-purple-950/90 text-purple-300" : "bg-zinc-900/90 text-zinc-400"}`}>

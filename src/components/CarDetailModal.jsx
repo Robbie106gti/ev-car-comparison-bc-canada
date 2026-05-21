@@ -8,6 +8,7 @@ import {
   isEstimatedMonthly,
   loanTermMonths,
 } from "../utils/finance";
+import { getModelVariants } from "../utils/carVariants";
 
 function galleryColors(colors, max = 3) {
   if (!colors?.length) return [];
@@ -18,10 +19,12 @@ function galleryColors(colors, max = 3) {
 
 export default function CarDetailModal({
   car,
+  cars = [],
   financeAssumptions,
   onClose,
   onOpenCalc,
   onToggleCompare,
+  onSelectCar,
   inCompare,
   compareDisabled,
 }) {
@@ -60,6 +63,8 @@ export default function CarDetailModal({
   const showEst = isEstimatedMonthly(car, financeAssumptions);
   const termMonths = loanTermMonths(financeAssumptions.loanTermYears);
   const rebateEligible = car.federalRebate > 0;
+  const variants = useMemo(() => getModelVariants(car, cars), [car, cars]);
+  const showVariants = variants.length > 1;
 
   return (
     <div
@@ -86,13 +91,13 @@ export default function CarDetailModal({
         </button>
 
         {/* Gallery */}
-        <div className="relative h-48 sm:h-64 bg-zinc-900 overflow-hidden">
+        <div className="relative aspect-[2/1] sm:aspect-video max-h-72 sm:max-h-80 bg-zinc-950 overflow-hidden flex items-center justify-center px-4 py-3">
           <img
             src={imageUrl}
             alt={`${car.make} ${car.model}`}
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full max-h-full object-contain object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
           {swatches.length > 1 && (
             <div className="absolute bottom-3 left-4 right-4 flex gap-2 flex-wrap">
               {swatches.map((c, i) => (
@@ -126,6 +131,60 @@ export default function CarDetailModal({
             {car.model}
           </h2>
           <p className="text-zinc-400 text-sm mt-0.5">{car.trim}</p>
+
+          {showVariants && (
+            <div className="mt-5">
+              <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider mb-2">
+                Compare trims · {car.make} {car.model}
+              </p>
+              <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x snap-mandatory scrollbar-thin">
+                {variants.map((v) => {
+                  const selected = v.id === car.id;
+                  const vMonthly = getCarEstimatedMonthly(v, financeAssumptions);
+                  const vEst = isEstimatedMonthly(v, financeAssumptions);
+                  return (
+                    <button
+                      key={v.id}
+                      type="button"
+                      onClick={() => onSelectCar?.(v)}
+                      className={`snap-start shrink-0 min-w-[9.5rem] max-w-[11rem] text-left rounded-xl border px-3 py-2.5 transition-all ${
+                        selected
+                          ? "border-emerald-500 bg-emerald-950/40 ring-1 ring-emerald-500/50"
+                          : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"
+                      }`}
+                    >
+                      <p
+                        className={`text-sm font-semibold leading-tight truncate ${
+                          selected ? "text-emerald-200" : "text-white"
+                        }`}
+                      >
+                        {v.trim}
+                      </p>
+                      <p className="text-xs text-zinc-400 mt-1">
+                        {fmt(v.totalAfterIncentives)}
+                        <span className="text-zinc-600"> after</span>
+                      </p>
+                      {vMonthly != null ? (
+                        <p className="text-xs text-zinc-300 mt-0.5">
+                          ${vMonthly.toLocaleString()}/mo
+                          {vEst && (
+                            <span className="text-amber-500/90 ml-1">est.</span>
+                          )}
+                        </p>
+                      ) : (
+                        <p className="text-xs text-zinc-600 mt-0.5 italic">monthly —</p>
+                      )}
+                      {selected && (
+                        <span className="inline-block mt-1.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-400">
+                          viewing
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Specs strip */}
           <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-xl bg-zinc-900 border border-zinc-800">

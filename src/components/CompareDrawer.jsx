@@ -78,8 +78,8 @@ export default function CompareDrawer({ cars, onClose, onRemove, financeAssumpti
           <div className="bg-zinc-950" />
           {cars.map(car => (
             <div key={car.id} className="bg-zinc-950 p-4">
-              <div className="relative h-24 rounded-lg overflow-hidden mb-3 bg-zinc-900">
-                <CarImage car={car} />
+              <div className="relative aspect-[2/1] rounded-lg overflow-hidden mb-3 bg-zinc-950 flex items-center justify-center px-2 py-1">
+                <CarImage car={car} className="max-h-full" />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
               </div>
               <div className="flex items-start justify-between">

@@ -6,7 +6,8 @@ const LOCAL_IMAGES = {
   "Tesla|Model 3": "/cars/tesla-model-3.jpg",
 };
 
-export default function CarImage({ car, className = "" }) {
+export default function CarImage({ car, className = "", fit = "contain" }) {
+  const objectClass = fit === "cover" ? "object-cover object-center" : "object-contain object-center";
   const local = LOCAL_IMAGES[`${car.make}|${car.model}`];
   const [src, setSrc] = useState(() => local ?? getCarImageUrl(car));
   const [failed, setFailed] = useState(false);
@@ -42,7 +43,7 @@ export default function CarImage({ car, className = "" }) {
       loading="lazy"
       decoding="async"
       onError={handleError}
-      className={`object-cover object-center w-full h-full ${className}`}
+      className={`${objectClass} w-full h-full max-h-full ${className}`}
     />
   );
 }
