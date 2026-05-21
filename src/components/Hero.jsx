@@ -45,6 +45,12 @@ export default function Hero({
             </p>
             <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm">
               <Link
+                to="/cars"
+                className="text-zinc-500 hover:text-emerald-400 transition-colors"
+              >
+                Car guide
+              </Link>
+              <Link
                 to="/about"
                 className="text-zinc-500 hover:text-emerald-400 transition-colors"
               >
@@ -61,6 +67,12 @@ export default function Hero({
 
           <div className="flex flex-col sm:flex-row items-end sm:items-start gap-3 shrink-0">
             <FinanceAssumptions assumptions={financeAssumptions} onChange={onFinanceChange} />
+            <Link
+              to="/cars"
+              className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700/80"
+            >
+              Car guide
+            </Link>
             <Link
               to="/evap-rebate"
               className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all border border-zinc-700/80"

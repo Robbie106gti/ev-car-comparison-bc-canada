@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { cars, makes, drivetrains } from "../data/cars";
 import CarCard from "../components/CarCard";
 import FilterBar from "../components/FilterBar";
@@ -9,6 +10,7 @@ import FinanceCalculator from "../components/FinanceCalculator";
 import { DEFAULT_FINANCE, getCarEstimatedMonthly } from "../utils/finance";
 
 export default function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
     make: "All", drivetrain: "All", sunroof: false,
     heatedSeats: false, ventilatedSeats: false, heatedSteeringWheel: false,
@@ -21,6 +23,22 @@ export default function HomePage() {
   const [view, setView] = useState("grid");
   const [financeAssumptions, setFinanceAssumptions] = useState({ ...DEFAULT_FINANCE });
   const [selectedCar, setSelectedCar] = useState(null);
+
+  useEffect(() => {
+    const carId = searchParams.get("car");
+    if (!carId) return;
+    const found = cars.find((c) => String(c.id) === carId);
+    if (found) setSelectedCar(found);
+  }, [searchParams]);
+
+  const closeCarDetail = useCallback(() => {
+    setSelectedCar(null);
+    if (searchParams.get("car")) {
+      const next = new URLSearchParams(searchParams);
+      next.delete("car");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const filtered = useMemo(() => {
     let list = [...cars];
@@ -148,7 +166,7 @@ export default function HomePage() {
           car={selectedCar}
           cars={cars}
           financeAssumptions={financeAssumptions}
-          onClose={() => setSelectedCar(null)}
+          onClose={closeCarDetail}
           onSelectCar={setSelectedCar}
           onOpenCalc={() => openCalc(selectedCar)}
           onToggleCompare={() => toggleCompare(selectedCar)}
