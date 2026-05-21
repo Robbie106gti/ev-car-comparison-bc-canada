@@ -43,6 +43,20 @@ export default function Hero({
               Real CAD pricing · BC taxes · Payments use your assumptions (
               {formatCad(downPayment)} down, {formatCad(tradeIn)} trade, {loanTermYears} yr)
             </p>
+            <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm">
+              <Link
+                to="/about"
+                className="text-zinc-500 hover:text-emerald-400 transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                to="/evap-rebate"
+                className="text-zinc-500 hover:text-emerald-400 transition-colors"
+              >
+                Federal rebate
+              </Link>
+            </nav>
           </div>
 
           <div className="flex flex-col sm:flex-row items-end sm:items-start gap-3 shrink-0">
