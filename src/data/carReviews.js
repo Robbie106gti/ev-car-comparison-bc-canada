@@ -76,25 +76,29 @@ export const carReviews = {
 
   "Kia EV6": {
     ownerSentiment:
-      "Mixed — styling and performance loved, ICCU failure is a serious recurring issue",
+      "Mixed — driving dynamics and 800V charging praised; ICCU failures and no federal rebate are major concerns",
     consumerReportsReliability:
       "BELOW AVERAGE — 2022, 2023, 2024 all rated less reliable than average",
     pros: [
-      "Styling and driving dynamics rated highest by owners (4.5-4.6/5 on KBB)",
-      "800V fast charging is genuinely impressive — owners love the speed",
-      "Spacious, comfortable interior",
-      "75-80% of owners recommend it despite issues",
+      "800V E-GMP: 350 kW DC, ~18–20 min 10–80% — transformative for BC Highway 1 road trips",
+      "Wind RWD: 513 km NRCan — best EV6 range; heat pump for BC winters",
+      "Sporty, engaging driving — CarGurus Canada: masks weight well, firm communicative ride",
+      "SynTex synthetic leather standard all trims (no cloth); V2L standard",
+      "690 L cargo (1,322 L seats folded) — crossover practicality",
+      "10 yr / 200,000 km powertrain + battery warranty",
+      "NACS port — Tesla Supercharger access (verify station compatibility on route)",
+      "2025 Juniper refresh improves dual 12.3\" displays and software",
     ],
     cons: [
-      "ICCU (Integrated Charging Control Unit) failure is widespread — leaves car dead without warning while driving",
-      "Transport Canada recall 2024173: ICCU can fail, causing loss of drive power — safety risk",
-      "NHTSA opened investigation into power loss on 2022 models",
-      "Home charging issues: charging stops before completing, requires manual restart",
-      "Apple CarPlay disconnects and reconnects constantly (2022-2023 owner complaint)",
-      "Paint quality complaints on 2022 models",
-      "Battery cooling fluid replacement needed (owner reported 1 day in shop)",
-      "One owner: battery pack failure took 21 days under warranty, hadn't been fixed yet",
-      "KBB 2023 summary: 'ICCU Design Flaw, Excessive Time to Repair, Poor Range in Winter'",
+      "No federal EVAP rebate on any 2025 trim — all over $50K MSRP cap (EV4 Wind Premium is ~$17K less after rebate with sunroof)",
+      "Panoramic sunroof only on Land + Premium Package (~$60,685+) — CarGurus: most trims lack sunroof; expensive to get with AWD",
+      "GT performance model discontinued in Canada for 2025",
+      "Light RWD: no heat pump, 381 km rated — expect ~250–290 km BC winter",
+      "ICCU (Integrated Charging Control Unit) failure widespread on 2022–2024 — Transport Canada recall 2024173",
+      "Rear cross-traffic auto-brake: CarGurus flagged sudden hard unnecessary stops in driveways; cannot disable without losing alert",
+      "Cargo modest vs ID.4 (858 L), Model Y (854 L), bZ (784 L); low roofline — tall drivers report tight headroom",
+      "Not all Tesla Superchargers open to non-Tesla NACS — plan BC trips; optional CCS adapter helps",
+      "Voice recognition poor without active Kia Connect subscription (CarGurus)",
     ],
     recalls: [
       "Transport Canada 2024173: ICCU failure — loss of drive power risk. Software update fix.",
@@ -105,20 +109,21 @@ export const carReviews = {
     ownerQuotes: [
       '"ICCU failures are widely reported for this car, leaves car inoperable without warning while driving. Current recall is just a software upgrade of uncertain benefit." — Consumer Reports owner, 2024 EV6',
       '"I bought my 2023 EV6 GT-LINE used in December 2024 and by February 2025, the ICCU died while I was driving. It took two months for Kia to get the part." — KBB owner',
-      '"The main battery pack developed a malfunction. As of today it\'s been 21 days, which qualifies under New Jersey\'s lemon law." — Consumer Reports owner',
+      '"The EV6 lacks a panoramic sunroof, but we didn\'t miss it. The oversized standard design works just fine." — CarGurus.ca Canadian review (base trims)',
+      '"Rear cross-traffic auto-brake triggered a sudden, hard, unexpected halt when reversing from a driveway — unpleasant and cannot be turned off without disabling the whole system." — CarGurus.ca',
       '"0 problems in 3 years. Love charging in my garage." — KBB owner (2022 model)',
-      '"Great machine 0 problems. Trust me you\'re gonna love it." — KBB owner',
     ],
     canadianNotes:
-      "NACS port on 2025+. 800V charging is best-in-class for speed. ICCU issue is serious — if buying 2022-2024, confirm recall was completed. 2025+ models have revised ICCU design. Range in Canadian winters will drop noticeably — owners report poor cold-weather range.",
+      "2025 MY is current in Canada (not 2026 yet). Six trims: Light ($52,185), Wind ($54,995), Land AWD ($57,185), Land + Premium ($60,685), Land + GT-Line ($63,185), GT-Line Limited ($68,061) — all incl. $2,150 dest, no rebate. vs EV4: EV6 Wind RWD matches EV4 range (~513 km) but costs ~$14K more with no rebate; EV6 wins on 800V road-trip charging and cargo. EV4 Wind Premium ($43,685 after rebate) is the daily-driver value pick. Confirm kia.ca pricing before ordering.",
     reliabilityNotes:
-      "Consumer Reports rates 2022, 2023, 2024 EV6 all BELOW AVERAGE reliability. ICCU failure is the defining issue — it can strand you without warning. Kia's warranty is good but repair wait times have been unacceptably long (months, not weeks). 2025+ models may have addressed ICCU but no long-term data yet.",
+      "Consumer Reports: 2022–2024 BELOW AVERAGE. ICCU can strand the car without warning; Kia warranty is strong but EV6 repair waits have been months. 2025 revised ICCU — limited data. Shares E-GMP with EV4 (400V) — monitor ICCU-related campaigns on both.",
     sources: [
       "Consumer Reports owner surveys",
       "KBB consumer reviews",
       "Transport Canada recall database",
+      "CarGurus.ca Canadian EV6 review (GT-Line Limited)",
       "NHTSA",
-      "KBB 2023 review summary",
+      "User-provided 2025 Kia EV6 Canada guide (May 2026)",
     ],
   },
 

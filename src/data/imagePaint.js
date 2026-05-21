@@ -5,7 +5,7 @@ const NEUTRAL_COLOR =
   /\b(white|black|grey|gray|silver|pearl|stealth|snow|crystal|glacier|gravity|magnetite|moonstone|scale|magnesium|space|chronos|mythos|typhoon|panthera|makalu|savile|uyuni|summit|sterling|iridescent|quicksilver|wind chill|heavy metal|elemental|interstellar|vapour|gelato|mineral|abyss|cyber|deep black|grenadilla|candy|atlas|ivory|ice silver|steel matte)\b/i;
 
 const COLORFUL_HINT =
-  /\b(blue|red|green|orange|yellow|teal|copper|rose|crimson|cosmic|solar|flare|rush|underground|digital|lucid|performance|energetic|cardamom|moss|fusion|namsan|iceberg|mineral|runway|yacht|ocean|magma|navarra|portimao|cape|river rock|gold|jupiter|thunder|radiant|tandoori)\b/i;
+  /\b(blue|red|green|orange|yellow|teal|copper|rose|crimson|cosmic|solar|flare|rush|underground|digital|lucid|performance|energetic|cardamom|moss|fusion|namsan|iceberg|mineral|runway|yacht|ocean|magma|midnight|nebula|navarra|portimao|cape|river rock|gold|jupiter|thunder|radiant|tandoori)\b/i;
 
 export function colorNameToPaintDescription(name) {
   return name
