@@ -209,18 +209,20 @@ export const carReviews = {
     kbbConsumerRating: "No reviews yet",
     consumerReportsReliability: "Not yet rated — too new",
     pros: [
+      "Four 2026 Canada trims: FWD (399 km), FWD LR (496 km), Sport AWD (438 km), GT AWD (438 km + luxury)",
       "First owners describe acceleration as 'ungodly' and 'one MF'n smooth vehicle' (Uncharted forum)",
-      "338 HP AWD variant feels quick and balanced on winding roads (Road & Track test)",
-      "X-MODE off-road system works on packed dirt and moderate terrain",
+      "338 HP Sport/GT AWD feels quick and balanced on winding roads (Road & Track test)",
+      "X-MODE on Sport/GT — off-road system works on packed dirt and moderate terrain",
       "14-inch infotainment + 7-inch driver display is well-spec'd",
       "NACS charging port standard — Supercharger access",
       "Squircle steering wheel 'weird at first, but hands get used to it' — Car and Driver",
+      "CarGurus and many reviewers peg Sport AWD as the value sweet spot",
     ],
     cons: [
       "Gear selector knob easy to confuse with infotainment rotary — Car and Driver noted this",
-      "No standard AWD is a head-scratcher for Subaru — Road & Track called it out directly",
-      "FWD LR variant is down significantly on power (221 hp vs 338 hp AWD)",
-      "Range is modest — 290 miles AWD, 300+ miles FWD (EPA)",
+      "Base FWD is 165 hp — much slower than 221 hp FWD LR or 338 hp AWD trims",
+      "GT AWD loses $5K federal rebate (MSRP over incentive cap) — pay up for sunroof/audio/360 cam",
+      "Range is modest on AWD trims (~438 km Canada rating vs 496 km FWD LR)",
       "Very new — zero reliability data from real owners",
     ],
     recalls: [
@@ -233,7 +235,7 @@ export const carReviews = {
       '"The Uncharted felt decently quick leaving a stoplight... poised, balanced, and powerful enough to be interesting on a winding road." — Road & Track (AWD GT)',
     ],
     canadianNotes:
-      "Shares defroster recall with Toyota bZ and Lexus RZ — relevant for BC winters, confirm it's been addressed. NACS port is a plus for BC road trips. Very early in Canadian market — no long-term data. Subaru dealer network is good across BC.",
+      "2026 Canada lineup: FWD, FWD LR, Sport AWD, GT AWD — Sport is the common recommendation; GT trades federal rebate for panoramic roof, Harman Kardon, ventilated seats, and 360° camera. Shares defroster recall with Toyota bZ and Lexus RZ — relevant for BC winters, confirm it's been addressed. NACS port is a plus for BC road trips. Very early in Canadian market — no long-term data. Subaru dealer network is good across BC.",
     reliabilityNotes:
       "No reliability data. New platform (shared Toyota TNGA-C architecture, same as Toyota C-HR). The Toyota bZ shares this architecture and had issues — monitor carefully. First-year production of any new platform warrants caution.",
     sources: [

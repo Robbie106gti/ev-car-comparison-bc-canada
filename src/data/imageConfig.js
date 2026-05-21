@@ -36,6 +36,7 @@ export const imageConfigByCarId = {
   1: { imageTrim: "icona" },
   2: { imageTrim: "wind-premium" },
   3: { imageTrim: "gt-line" },
+  27: { imageTrim: "fwd" },
   4: { imageTrim: "fwd-lr" },
   5: { imageTrim: "sport" },
   6: { imageTrim: "gt" },
