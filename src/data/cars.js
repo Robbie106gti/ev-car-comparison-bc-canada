@@ -1,4 +1,7 @@
-export const cars = [
+import { colorsByCarId } from "./carColors";
+import { getImageConfig } from "./imageConfig";
+
+const rawCars = [
   {
     id: 1, make: "Fiat", model: "500e", trim: "Icona", year: 2026,
     drivetrain: "FWD", msrp: 42290, dealerDiscount: 8000, federalRebate: 5000,
@@ -268,6 +271,12 @@ export const cars = [
     url: "https://www.genesis.com/ca/en/vehicles/gv60.html",
   },
 ];
+
+export const cars = rawCars.map((car) => ({
+  ...car,
+  ...getImageConfig(car),
+  colors: colorsByCarId[car.id] ?? [],
+}));
 
 export const makes = [...new Set(cars.map(c => c.make))].sort();
 export const drivetrains = ["FWD", "RWD", "AWD"];

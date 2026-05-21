@@ -1,12 +1,32 @@
+import CarImage from "./CarImage";
+import ColorSwatches from "./ColorSwatches";
+
 export default function CarCard({ car, inCompare, onToggleCompare, compareDisabled, onOpenCalc }) {
   const fmt = (n) => n ? `$${n.toLocaleString()}` : "—";
   const rebateEligible = car.federalRebate > 0;
 
   return (
-    <div className={`relative rounded-2xl border transition-all duration-200 overflow-hidden
+    <div className={`relative rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col
       ${inCompare ? "border-emerald-500 bg-zinc-900" : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"}`}>
 
-      <div className="flex items-start justify-between p-4 pb-3">
+      {/* Hero image */}
+      <div className="relative h-40 sm:h-44 bg-zinc-950 overflow-hidden">
+        <CarImage car={car} className="scale-105 hover:scale-100 transition-transform duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/20 to-transparent pointer-events-none" />
+        <div className="absolute top-3 right-3 flex flex-col gap-1 items-end">
+          <span className={`text-xs px-2 py-0.5 rounded-full font-medium backdrop-blur-sm
+            ${car.drivetrain === "AWD" ? "bg-blue-950/90 text-blue-300" : car.drivetrain === "RWD" ? "bg-purple-950/90 text-purple-300" : "bg-zinc-900/90 text-zinc-400"}`}>
+            {car.drivetrain}
+          </span>
+          {car.dataConfirmed && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-950/90 text-emerald-400 font-medium backdrop-blur-sm">
+              ✓ confirmed
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="flex items-start justify-between px-4 pt-3 pb-2">
         <div>
           <p className="text-zinc-400 text-xs font-medium uppercase tracking-wider">{car.make} · {car.year}</p>
           <h2 className="text-xl font-bold text-white mt-0.5 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
@@ -14,16 +34,13 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
           </h2>
           <p className="text-zinc-500 text-sm mt-0.5">{car.trim}</p>
         </div>
-        <div className="flex flex-col gap-1 items-end">
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium
-            ${car.drivetrain === "AWD" ? "bg-blue-950 text-blue-300" : car.drivetrain === "RWD" ? "bg-purple-950 text-purple-300" : "bg-zinc-800 text-zinc-400"}`}>
-            {car.drivetrain}
-          </span>
-          {car.dataConfirmed && <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 font-medium">✓ confirmed</span>}
-        </div>
       </div>
 
-      <div className="px-4 py-3 border-t border-b border-zinc-800">
+      <div className="px-4 pb-3 border-b border-zinc-800">
+        <ColorSwatches colors={car.colors} />
+      </div>
+
+      <div className="px-4 py-3 border-b border-zinc-800">
         <div className="flex items-end justify-between">
           <div>
             <p className="text-zinc-600 text-xs mb-0.5">monthly payment</p>
@@ -62,7 +79,7 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
         ))}
       </div>
 
-      <div className="px-4 py-3 flex flex-wrap gap-1.5 border-b border-zinc-800">
+      <div className="px-4 py-3 flex flex-wrap gap-1.5 border-b border-zinc-800 flex-grow">
         {car.sunroof === true && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-950 text-amber-300">☀ sunroof</span>}
         {car.sunroof === false && <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-600">no sunroof</span>}
         {car.seats > 5 && <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">{car.seats} seats</span>}
@@ -71,7 +88,7 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
         {car.notes && <span className="text-xs text-zinc-600 italic mt-0.5 w-full truncate">{car.notes}</span>}
       </div>
 
-      <div className="px-4 py-3 flex gap-2">
+      <div className="px-4 py-3 flex gap-2 mt-auto">
         <button onClick={onToggleCompare} disabled={compareDisabled}
           className={`flex-1 text-sm font-medium py-2 rounded-xl transition-all
             ${inCompare ? "bg-emerald-500 text-black hover:bg-emerald-400" : compareDisabled ? "bg-zinc-800 text-zinc-600 cursor-not-allowed" : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"}`}>

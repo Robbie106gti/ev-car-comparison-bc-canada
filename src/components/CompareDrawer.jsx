@@ -1,3 +1,6 @@
+import CarImage from "./CarImage";
+import ColorSwatches from "./ColorSwatches";
+
 const fmt = (n) => (n != null ? `$${Number(n).toLocaleString()}` : "—");
 
 const rows = [
@@ -41,6 +44,10 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
           <div className="bg-zinc-950" />
           {cars.map(car => (
             <div key={car.id} className="bg-zinc-950 p-4">
+              <div className="relative h-24 rounded-lg overflow-hidden mb-3 bg-zinc-900">
+                <CarImage car={car} />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent" />
+              </div>
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-zinc-500 text-xs">{car.make} · {car.year}</p>
@@ -50,6 +57,9 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
                   <p className="text-zinc-500 text-sm">{car.trim}</p>
                 </div>
                 <button onClick={() => onRemove(car.id)} className="text-zinc-700 hover:text-zinc-400 text-lg ml-2">×</button>
+              </div>
+              <div className="mt-2">
+                <ColorSwatches colors={car.colors} compact />
               </div>
             </div>
           ))}
