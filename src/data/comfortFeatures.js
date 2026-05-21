@@ -5,6 +5,7 @@
  */
 export const comfortByCarId = {
   1: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
+  47: { heatedSeats: true, heatedSeatsDetail: "front (verify on Pop build)", ventilatedSeats: false, heatedSteeringWheel: false },
   2: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
   3: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
   37: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },

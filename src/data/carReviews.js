@@ -5,35 +5,47 @@
 
 export const carReviews = {
   "Fiat 500e": {
-    ownerSentiment: "Positive — but tiny sample (1 KBB review for 2024, none for 2026 yet)",
+    ownerSentiment: "Positive in Europe — 2026 Canada launch; tiny sample (1 KBB review for 2024 MY, none for 2026 yet)",
+    consumerReportsReliability: "Thin data — 2026 not rated; no long-term Canadian owner surveys",
     pros: [
       "Go-kart handling — owners consistently praise how fun it is in the city",
       "Surprisingly quick off the line for a small car",
       "Easy to park — fits in spaces other cars can't",
-      "85 kW DC fast charging: 0-80% in 35 min is respectable for the size",
+      "85 kW DC fast charging: 0-80% in ~35 min is respectable for the size",
+      "227 km NRCan rated range — competitive for a city EV at this price",
+      "Pop + Icona both qualify for $5K federal EVAP; Icona often has large dealer discounts",
       "Named Urban Green Car of the Year 2025 by Green Car Journal (2nd consecutive year)",
       "Lightest passenger BEV in its segment at under 3,000 lbs",
     ],
     cons: [
-      "149 miles (240 km) EPA range — in cold Canadian winters expect ~100-110 miles real-world",
+      "~170 km real-world winter range verified in BC — no heat pump hurts cold-weather efficiency",
+      "No sunroof, no AWD — city car only; not for mountain highways or ski trips",
       "Very small on the freeway — owners report feeling unsafe surrounded by trucks",
       "Firm ride — bumps and rough roads are felt inside",
-      "Back seat is extremely tight",
-      "Fiat dealer network in Canada is very thin",
+      "Back seat is extremely tight (4 seats)",
+      "Fiat dealer network in Canada is very thin — service and parts can be slow",
       "No DC fast charging above 85 kW — slower than Korean/German rivals",
+      "Pop: no wiper de-icer; heated seats on Pop — confirm on build sheet",
     ],
     recalls: [
-      "No major Canadian recalls found as of May 2026",
+      "No major Canadian recalls found as of May 2026 — monitor Stellantis campaigns",
     ],
     ownerQuotes: [
-      '"Easier to drive and more responsive than my old ICE cars in the city. Driving is actually fun." — KBB owner review',
+      '"Easier to drive and more responsive than my old ICE cars in the city. Driving is actually fun." — KBB owner review (2024 MY)',
       '"Smaller cabin and seats than previous cars, but quite comfortable nonetheless." — KBB owner review',
     ],
     canadianNotes:
-      "CCS2 charging. Very limited 2026 Canadian owner data — model is new here. Best suited for Metro Vancouver or Victoria commuters under 80 km/day with home charging. Not recommended for BC highway or mountain driving. Fiat dealers in BC: handful only.",
+      "2026 Canada: Pop (~$37,290 after $5K federal, ~$42,290 incl. freight before tax) and Icona (~$32,290 pre-tax stack after $8K dealer + $5K federal; confirmed ~$414/mo @ 1.99% with $5K down + $8K trade). CCS1 DC port — Tesla Supercharger access requires NACS adapter (not native NACS). ~170 km winter range realistic without heat pump. No sunroof on either trim. Best for Metro Vancouver / Victoria commuters under 80 km/day with home charging. Not recommended for BC Interior highways. Fiat dealers in BC: handful only.",
     reliabilityNotes:
-      "Essentially no Canadian reliability data for 2026 yet. European 500e has been selling since 2020 with generally positive reliability. Stellantis quality can be inconsistent — watch first-year Canadian production.",
-    sources: ["KBB consumer reviews", "AAA review", "Green Car Journal", "Fiat Canada"],
+      "Consumer Reports has very thin 2026 Canadian data. European 500e sold since 2020 with generally positive reliability. Stellantis first-year Canadian production quality can be inconsistent — inspect at delivery and complete any open recalls.",
+    sources: [
+      "KBB consumer reviews",
+      "AAA review",
+      "Green Car Journal",
+      "Fiat Canada",
+      "NRCan fuel consumption ratings",
+      "User-provided 2026 Fiat 500e Canada guide (May 2026)",
+    ],
   },
 
   "Kia EV4": {

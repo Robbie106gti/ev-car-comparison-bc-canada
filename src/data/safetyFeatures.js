@@ -5,7 +5,8 @@
  * parkingSensors = ultrasonic park assist (not camera-based Tesla vision).
  */
 export const safetyByCarId = {
-  1: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
+  1: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear + blind spot (Icona)" },
+  47: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
   2: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
   3: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },
   37: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },

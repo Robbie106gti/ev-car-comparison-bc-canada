@@ -4,6 +4,7 @@
  */
 export const ratingOverrides = {
   1: { reviews: 3 },
+  47: { reviews: 3 },
   14: { reviews: 2 },
   15: { reviews: 2 },
   16: { reviews: 4, comfort: 3 },

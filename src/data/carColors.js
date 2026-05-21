@@ -13,13 +13,21 @@ const ID4_COLORS = [
   { name: "Grenadilla Black Metallic", hex: "#2a2c30" },
 ];
 
+/** Fiat 500e (2026 Canada) — Pop + Icona */
+const FIAT_500E_COLORS = [
+  { name: "Gelato White", hex: "#f4f1ea" },
+  { name: "Mineral Grey", hex: "#5c6369" },
+  { name: "Onyx Black", hex: "#1c1e22" },
+  { name: "Ice Silver", hex: "#b4b8bc" },
+  { name: "Ocean Green", hex: "#3a6a58" },
+  { name: "Rose Gold", hex: "#c4a088" },
+  { name: "Miami Sunset", hex: "#e87850" },
+  { name: "Ocean Blue", hex: "#2f5f8f" },
+];
+
 export const colorsByCarId = {
-  1: [
-    { name: "Gelato White", hex: "#f4f1ea" },
-    { name: "Mineral Grey", hex: "#5c6369" },
-    { name: "Ocean Blue", hex: "#2f5f8f" },
-    { name: "Rose Gold", hex: "#c4a088" },
-  ],
+  1: FIAT_500E_COLORS,
+  47: FIAT_500E_COLORS,
   2: [
     { name: "Snow White Pearl", hex: "#eceae4" },
     { name: "Gravity Grey", hex: "#4a4f54" },

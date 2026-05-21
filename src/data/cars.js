@@ -6,6 +6,7 @@ import { getImageConfig } from "./imageConfig";
 
 const REVIEW_KEY_BY_ID = {
   1: "Fiat 500e",
+  47: "Fiat 500e",
   2: "Kia EV4",
   3: "Kia EV4",
   37: "Kia EV4",
@@ -61,13 +62,23 @@ export function getReviewsForCar(car) {
 
 const rawCars = [
   {
+    id: 47, make: "Fiat", model: "500e", trim: "Pop", year: 2026,
+    drivetrain: "FWD", msrp: 39995, dealerDiscount: 0, federalRebate: 5000,
+    totalAfterIncentives: 37290, monthlyPayment: null, apr: 1.99, loanTerm: 60,
+    downPayment: 5000, tradeIn: 8000, range: 227, rangeWinter: 170, sunroof: false,
+    dataConfirmed: false, seats: 4, cargo: null,
+    tags: ["city", "budget", "rebate-eligible", "ccs1", "supercharger-adapter"],
+    notes: "~$42,290 incl. $2,295 freight before tax → ~$37,290 after $5K federal. No $8K dealer discount on Pop. Heated front seats — verify on build. No wiper de-icer. ~170 km winter (no heat pump). CCS1 DC; Tesla Supercharger via NACS adapter.",
+    url: "https://www.fiatcanada.com/en/500e",
+  },
+  {
     id: 1, make: "Fiat", model: "500e", trim: "Icona", year: 2026,
-    drivetrain: "FWD", msrp: 42290, dealerDiscount: 8000, federalRebate: 5000,
-    totalAfterIncentives: 23584, monthlyPayment: 414, apr: 1.99, loanTerm: 60,
-    downPayment: 5000, tradeIn: 8000, range: 227, sunroof: false,
+    drivetrain: "FWD", msrp: 42995, dealerDiscount: 8000, federalRebate: 5000,
+    totalAfterIncentives: 32290, monthlyPayment: 414, apr: 1.99, loanTerm: 60,
+    downPayment: 5000, tradeIn: 8000, range: 227, rangeWinter: 170, sunroof: false,
     dataConfirmed: true, seats: 4, cargo: null,
-    tags: ["city", "budget", "rebate-eligible"],
-    notes: "$8K dealer discount + $5K federal. City car.",
+    tags: ["city", "budget", "rebate-eligible", "ccs1", "supercharger-adapter"],
+    notes: "CONFIRMED $414/mo @ 1.99% ($5K down + $8K trade, Fiat build). ~$45,290 incl. freight before $8K dealer + $5K federal → ~$32,290 pre-tax stack; payment may include tax/fees vs app pre-tax estimate (~$338/mo). ~170 km winter verified. No heat pump, no heated wheel, no sunroof. CCS1; Supercharger via adapter.",
     url: "https://www.fiatcanada.com/en/500e",
   },
   {
