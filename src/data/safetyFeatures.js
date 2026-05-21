@@ -6,8 +6,11 @@
  */
 export const safetyByCarId = {
   1: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
-  2: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },
+  2: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
   3: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },
+  37: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },
+  38: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },
+  39: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "360° surround view" },
   27: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
   4: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "rear" },
   5: { backupCamera: true, parkingSensors: true, parkingSensorsDetail: "front + rear" },

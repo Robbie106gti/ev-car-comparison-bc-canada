@@ -6,7 +6,10 @@
 export const comfortByCarId = {
   1: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
   2: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
-  3: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: true, ventilatedSeatsDetail: "front", heatedSteeringWheel: true },
+  3: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
+  37: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
+  38: { heatedSeats: true, heatedSeatsDetail: "front + rear", ventilatedSeats: true, ventilatedSeatsDetail: "front", heatedSteeringWheel: true },
+  39: { heatedSeats: true, heatedSeatsDetail: "front + rear", ventilatedSeats: true, ventilatedSeatsDetail: "front", heatedSteeringWheel: true },
   27: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: false },
   4: { heatedSeats: true, heatedSeatsDetail: "front", ventilatedSeats: false, heatedSteeringWheel: true },
   5: { heatedSeats: true, heatedSeatsDetail: "front + rear", ventilatedSeats: false, heatedSteeringWheel: true },

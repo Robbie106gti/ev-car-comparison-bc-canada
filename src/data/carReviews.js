@@ -36,6 +36,44 @@ export const carReviews = {
     sources: ["KBB consumer reviews", "AAA review", "Green Car Journal", "Fiat Canada"],
   },
 
+  "Kia EV4": {
+    ownerSentiment:
+      "Very early in Canada (May 2026) — no long-term owner data yet. Press previews positive on value; platform risk is the elephant in the room.",
+    consumerReportsReliability: "Not yet rated — too new",
+    pros: [
+      "Wind FWD: 552 km NRCan at ~$41K after rebate — exceptional range per dollar for a sedan",
+      "Five FWD trims all qualify for $5K federal EVAP rebate",
+      "NACS port standard — Tesla Supercharger access without adapter",
+      "7 yr / 160,000 km powertrain warranty beats most rivals (Tesla 8 yr / 192,000 km is longer but Kia dealer network is broader in BC)",
+      "408 L cargo — competitive for the class",
+      "Heat pump on Wind and above — important for BC winters (Light trim lacks it)",
+      "GT-Line V2L — useful for camping and power outages",
+    ],
+    cons: [
+      "Trunk is a liftback with a high lip and narrow opening — awkward for strollers and large boxes (not a true hatch)",
+      "400V architecture vs EV6's 800V — DC fast charging slower than Ioniq 5 / EV6 on road trips",
+      "Shares E-GMP derivatives with EV6 — ICCU (Integrated Charging Control Unit) failures are a documented EV6 issue; EV4 uses related hardware — monitor recalls",
+      "Light trim: no heat pump, 391 km range, 58.3 kWh — winter range will disappoint vs Wind",
+      "Wind Premium drops to 515 km vs 552 km on Wind — pay more for sunroof, get less rated range",
+      "Very new model — zero Canadian reliability or resale data",
+      "Kia dealer experience varies; first-year production bugs possible",
+    ],
+    recalls: [
+      "No Canada-specific EV4 recalls as of May 2026 — watch for ICCU-related campaigns inherited from EV6 platform",
+    ],
+    ownerQuotes: [],
+    canadianNotes:
+      "2026 Canada: Light ($37,185 after rebate), Wind ($41,185 — recommended), Wind Premium ($43,685), GT-Line ($46,685), GT-Line Limited ($50,185). All FWD, NACS, 408 L cargo. Compare Wind vs Tesla Model 3 and Hyundai Ioniq 6. If you road-trip Highway 1 often, weigh 400V charging vs 800V rivals. Confirm kia.ca build pricing before ordering.",
+    reliabilityNotes:
+      "No owner reliability data. EV4 is on Kia's ICCU-equipped charging architecture (400V variant of E-GMP). EV6 ICCU failures (Transport Canada recall 2024173) are the main platform concern — ask dealer if 2026 EV4 has revised hardware. Kia's long warranty is a genuine advantage if issues arise, but repair wait times on EV6 have been months.",
+    sources: [
+      "kia.ca EV4 specs",
+      "NRCan fuel consumption ratings",
+      "Kia EV6 ICCU recall / Consumer Reports",
+      "User-provided 2026 Kia EV4 Canada guide (May 2026)",
+    ],
+  },
+
   "Kia EV6": {
     ownerSentiment:
       "Mixed — styling and performance loved, ICCU failure is a serious recurring issue",

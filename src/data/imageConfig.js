@@ -41,8 +41,11 @@ export const imageConfigByKey = {
 /** Per-trim CDN hints (ML-mapped; approximate for Canada-only names). */
 export const imageConfigByCarId = {
   1: { imageTrim: "icona" },
-  2: { imageTrim: "wind-premium" },
-  3: { imageTrim: "gt-line" },
+  2: { imageTrim: "light", imagePaintDescription: "magma-red" },
+  3: { imageTrim: "wind", imagePaintDescription: "dark-ocean-blue" },
+  37: { imageTrim: "wind-premium", imagePaintDescription: "magma-red" },
+  38: { imageTrim: "gt-line", imagePaintDescription: "dark-ocean-blue" },
+  39: { imageTrim: "gt-line-limited", imagePaintDescription: "magma-red" },
   27: { imageTrim: "fwd" },
   4: { imageTrim: "fwd-lr" },
   5: { imageTrim: "sport" },
