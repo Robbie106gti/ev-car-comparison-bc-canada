@@ -2,10 +2,18 @@ import CarImage from "./CarImage";
 import ColorSwatches from "./ColorSwatches";
 import ComfortBadges from "./ComfortBadges";
 import SafetyBadges from "./SafetyBadges";
+import {
+  getCarEstimatedMonthly,
+  isEstimatedMonthly,
+  loanTermMonths,
+} from "../utils/finance";
 
-export default function CarCard({ car, inCompare, onToggleCompare, compareDisabled, onOpenCalc }) {
+export default function CarCard({ car, financeAssumptions, inCompare, onToggleCompare, compareDisabled, onOpenCalc }) {
   const fmt = (n) => n ? `$${n.toLocaleString()}` : "—";
   const rebateEligible = car.federalRebate > 0;
+  const displayMonthly = getCarEstimatedMonthly(car, financeAssumptions);
+  const showEst = isEstimatedMonthly(car, financeAssumptions);
+  const termMonths = loanTermMonths(financeAssumptions.loanTermYears);
 
   return (
     <div className={`relative rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col
@@ -56,9 +64,16 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
         <div className="flex items-end justify-between">
           <div>
             <p className="text-zinc-600 text-xs mb-0.5">monthly payment</p>
-            {car.monthlyPayment ? (
-              <p className="text-3xl font-black text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
-                ${car.monthlyPayment.toLocaleString()}<span className="text-zinc-500 text-sm font-normal">/mo</span>
+            {displayMonthly != null ? (
+              <p className="text-3xl font-black text-white flex items-baseline gap-2 flex-wrap" style={{ fontFamily: "'Syne', sans-serif" }}>
+                <span>
+                  ${displayMonthly.toLocaleString()}<span className="text-zinc-500 text-sm font-normal">/mo</span>
+                </span>
+                {showEst && (
+                  <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300/90">
+                    est.
+                  </span>
+                )}
               </p>
             ) : (
               <p className="text-zinc-600 text-base font-medium italic">upload PDF to confirm</p>
@@ -66,7 +81,7 @@ export default function CarCard({ car, inCompare, onToggleCompare, compareDisabl
             {car.apr !== null && car.apr !== undefined && (
               <p className="text-zinc-500 text-xs mt-0.5">
                 {car.apr === 0 ? <span className="text-emerald-400 font-semibold">0% APR</span> : `${car.apr}% APR`}
-                {" · "}{car.loanTerm}mo
+                {" · "}{termMonths}mo
               </p>
             )}
           </div>

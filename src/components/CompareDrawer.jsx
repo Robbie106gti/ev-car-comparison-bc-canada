@@ -1,14 +1,14 @@
 import CarImage from "./CarImage";
 import ColorSwatches from "./ColorSwatches";
 import { formatComfort } from "../data/comfortFeatures";
-import { formatSafety } from "../data/safetyFeatures";
+import { getCarEstimatedMonthly, loanTermMonths } from "../utils/finance";
 
 const fmt = (n) => (n != null ? `$${Number(n).toLocaleString()}` : "—");
 
 const rows = [
-  { label: "Monthly Payment", key: "monthlyPayment", fmt: (v) => v ? `$${v}/mo` : "—", highlight: true },
+  { label: "Monthly Payment", key: "monthlyPayment", highlight: true, computed: true },
   { label: "APR", key: "apr", fmt: (v) => v === 0 ? "0% 🎉" : v != null ? `${v}%` : "—" },
-  { label: "Loan Term", key: "loanTerm", fmt: (v) => v ? `${v} months` : "—" },
+  { label: "Loan Term", key: "loanTerm", fmt: (v) => v ? `${v} months` : "—", computedTerm: true },
   { label: "MSRP", key: "msrp", fmt: fmt },
   { label: "Dealer Discount", key: "dealerDiscount", fmt: (v) => v > 0 ? `-$${v.toLocaleString()}` : "—" },
   { label: "Federal Rebate", key: "federalRebate", fmt: (v) => v > 0 ? `$${v.toLocaleString()} ✓` : "—" },
@@ -19,19 +19,45 @@ const rows = [
   { label: "Heated seats", key: "heatedSeats", fmt: (v, car) => formatComfort(v, car?.heatedSeatsDetail) },
   { label: "Ventilated seats", key: "ventilatedSeats", fmt: (v, car) => formatComfort(v, car?.ventilatedSeatsDetail) },
   { label: "Heated steering", key: "heatedSteeringWheel", fmt: (v) => formatComfort(v) },
-  { label: "Backup camera", key: "backupCamera", fmt: (v) => formatSafety(v) },
-  { label: "Parking sensors", key: "parkingSensors", fmt: (v, car) => formatSafety(v, car?.parkingSensorsDetail) },
   { label: "Seats", key: "seats", fmt: (v) => v ? `${v}` : "—" },
   { label: "Confirmed", key: "dataConfirmed", fmt: (v) => v ? "✓ Confirmed" : "Estimated" },
 ];
 
-export default function CompareDrawer({ cars, onClose, onRemove }) {
-  const best = (key) => {
-    const vals = cars.map(c => c[key]).filter(v => v != null && typeof v === "number");
+export default function CompareDrawer({ cars, onClose, onRemove, financeAssumptions }) {
+  const cellValue = (car, row) => {
+    if (row.computed) {
+      const m = getCarEstimatedMonthly(car, financeAssumptions);
+      return m != null ? `$${m}/mo` : "—";
+    }
+    if (row.computedTerm) {
+      return `${loanTermMonths(financeAssumptions.loanTermYears)} months`;
+    }
+    const val = car[row.key];
+    return row.fmt ? row.fmt(val, car) : val;
+  };
+
+  const best = (row) => {
+    if (row.computed) {
+      const vals = cars
+        .map((c) => getCarEstimatedMonthly(c, financeAssumptions))
+        .filter((v) => v != null);
+      return vals.length ? Math.min(...vals) : null;
+    }
+    const vals = cars.map(c => c[row.key]).filter(v => v != null && typeof v === "number");
     if (!vals.length) return null;
-    if (key === "monthlyPayment" || key === "msrp" || key === "totalAfterIncentives" || key === "apr") return Math.min(...vals);
-    if (key === "range") return Math.max(...vals);
+    if (row.key === "monthlyPayment" || row.key === "msrp" || row.key === "totalAfterIncentives" || row.key === "apr") return Math.min(...vals);
+    if (row.key === "range") return Math.max(...vals);
     return null;
+  };
+
+  const isBestCell = (car, row, bestVal) => {
+    if (bestVal == null) return false;
+    if (row.computed) {
+      const m = getCarEstimatedMonthly(car, financeAssumptions);
+      return m != null && m === bestVal;
+    }
+    const val = car[row.key];
+    return typeof val === "number" && val === bestVal;
   };
 
   return (
@@ -40,13 +66,11 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
       <div className="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-auto"
         style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
-        {/* Header */}
         <div className="sticky top-0 bg-zinc-950 border-b border-zinc-800 px-6 py-4 flex items-center justify-between z-10">
           <h2 className="text-xl font-bold" style={{ fontFamily: "'Syne', sans-serif" }}>Side-by-Side Comparison</h2>
           <button onClick={onClose} className="text-zinc-500 hover:text-white text-2xl leading-none">×</button>
         </div>
 
-        {/* Car headers */}
         <div className="grid gap-px bg-zinc-800" style={{ gridTemplateColumns: `160px repeat(${cars.length}, 1fr)` }}>
           <div className="bg-zinc-950" />
           {cars.map(car => (
@@ -72,9 +96,8 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
           ))}
         </div>
 
-        {/* Data rows */}
         {rows.map(row => {
-          const bestVal = best(row.key);
+          const bestVal = best(row);
           return (
             <div key={row.key} className="grid gap-px bg-zinc-800 border-t border-zinc-800"
               style={{ gridTemplateColumns: `160px repeat(${cars.length}, 1fr)` }}>
@@ -82,13 +105,12 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
                 <p className={`text-xs font-medium ${row.highlight ? "text-zinc-300" : "text-zinc-500"}`}>{row.label}</p>
               </div>
               {cars.map(car => {
-                const val = car[row.key];
-                const isBest = bestVal != null && typeof val === "number" && val === bestVal;
+                const isBest = isBestCell(car, row, bestVal);
                 return (
                   <div key={car.id}
                     className={`px-4 py-3 ${row.highlight ? "bg-zinc-900" : "bg-zinc-950"} ${isBest ? "border-l-2 border-emerald-500" : ""}`}>
                     <p className={`text-sm font-medium ${isBest ? "text-emerald-400" : row.highlight ? "text-white" : "text-zinc-300"}`}>
-                      {row.fmt(val, car)}
+                      {cellValue(car, row)}
                     </p>
                   </div>
                 );
@@ -97,7 +119,6 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
           );
         })}
 
-        {/* Links row */}
         <div className="grid gap-px bg-zinc-800 border-t border-zinc-800"
           style={{ gridTemplateColumns: `160px repeat(${cars.length}, 1fr)` }}>
           <div className="bg-zinc-950 px-4 py-3">

@@ -5,6 +5,7 @@ import FilterBar from "./components/FilterBar";
 import CompareDrawer from "./components/CompareDrawer";
 import Hero from "./components/Hero";
 import FinanceCalculator from "./components/FinanceCalculator";
+import { DEFAULT_FINANCE, getCarEstimatedMonthly } from "./utils/finance";
 
 export default function App() {
   const [filters, setFilters] = useState({
@@ -17,6 +18,7 @@ export default function App() {
   const [compareOpen, setCompareOpen] = useState(false);
   const [calcCar, setCalcCar] = useState(null);
   const [view, setView] = useState("grid"); // "grid" | "calc"
+  const [financeAssumptions, setFinanceAssumptions] = useState({ ...DEFAULT_FINANCE });
 
   const filtered = useMemo(() => {
     let list = [...cars];
@@ -30,16 +32,27 @@ export default function App() {
     if (filters.parkingSensors) list = list.filter(c => c.parkingSensors === true);
     if (filters.rebateOnly) list = list.filter(c => c.federalRebate > 0);
     if (filters.confirmedOnly) list = list.filter(c => c.dataConfirmed);
-    if (filters.maxMonthly < 1500) list = list.filter(c => c.monthlyPayment && c.monthlyPayment <= filters.maxMonthly);
+    if (filters.maxMonthly < 1500) {
+      list = list.filter(c => {
+        const monthly = getCarEstimatedMonthly(c, financeAssumptions);
+        return monthly != null && monthly <= filters.maxMonthly;
+      });
+    }
     list.sort((a, b) => {
-      if (filters.sortBy === "monthly") { if (!a.monthlyPayment) return 1; if (!b.monthlyPayment) return -1; return a.monthlyPayment - b.monthlyPayment; }
+      if (filters.sortBy === "monthly") {
+        const ma = getCarEstimatedMonthly(a, financeAssumptions);
+        const mb = getCarEstimatedMonthly(b, financeAssumptions);
+        if (ma == null) return 1;
+        if (mb == null) return -1;
+        return ma - mb;
+      }
       if (filters.sortBy === "range") return b.range - a.range;
       if (filters.sortBy === "msrp") return a.msrp - b.msrp;
       if (filters.sortBy === "apr") return (a.apr ?? 99) - (b.apr ?? 99);
       return 0;
     });
     return list;
-  }, [filters]);
+  }, [filters, financeAssumptions]);
 
   const toggleCompare = (car) => {
     setCompareList(prev =>
@@ -53,7 +66,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-      <Hero onViewChange={setView} currentView={view} />
+      <Hero
+        onViewChange={setView}
+        currentView={view}
+        cars={cars}
+        financeAssumptions={financeAssumptions}
+        onFinanceChange={setFinanceAssumptions}
+      />
 
       <div className="max-w-7xl mx-auto px-4 pb-24">
         {view === "calc" ? (
@@ -82,7 +101,7 @@ export default function App() {
                 ))}
               </div>
             </div>
-            <FinanceCalculator car={calcCar} />
+            <FinanceCalculator car={calcCar} financeAssumptions={financeAssumptions} />
           </div>
         ) : (
           <>
@@ -108,6 +127,7 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {filtered.map(car => (
                   <CarCard key={car.id} car={car}
+                    financeAssumptions={financeAssumptions}
                     inCompare={!!compareList.find(c => c.id === car.id)}
                     onToggleCompare={() => toggleCompare(car)}
                     compareDisabled={compareList.length >= 4 && !compareList.find(c => c.id === car.id)}
@@ -122,6 +142,7 @@ export default function App() {
 
       {compareOpen && (
         <CompareDrawer cars={compareList} onClose={() => setCompareOpen(false)}
+          financeAssumptions={financeAssumptions}
           onRemove={(id) => setCompareList(prev => prev.filter(c => c.id !== id))} />
       )}
       {compareList.length > 0 && !compareOpen && (
