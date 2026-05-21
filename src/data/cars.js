@@ -1,4 +1,5 @@
 import { colorsByCarId } from "./carColors";
+import { getComfortForCar } from "./comfortFeatures";
 import { getImageConfig } from "./imageConfig";
 
 const rawCars = [
@@ -276,6 +277,7 @@ export const cars = rawCars.map((car) => ({
   ...car,
   ...getImageConfig(car),
   colors: colorsByCarId[car.id] ?? [],
+  ...getComfortForCar(car.id),
 }));
 
 export const makes = [...new Set(cars.map(c => c.make))].sort();

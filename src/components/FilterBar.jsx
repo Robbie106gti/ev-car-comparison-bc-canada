@@ -51,6 +51,9 @@ export default function FilterBar({ filters, setFilters, makes, drivetrains }) {
         <span className="text-zinc-600 text-xs uppercase tracking-wider w-16">Filter</span>
         {[
           { key: "sunroof", label: "☀ Sunroof" },
+          { key: "heatedSeats", label: "🔥 Heated seats" },
+          { key: "ventilatedSeats", label: "❄ Ventilated" },
+          { key: "heatedSteeringWheel", label: "◎ Heated wheel" },
           { key: "rebateOnly", label: "$ Rebate eligible" },
           { key: "confirmedOnly", label: "✓ Confirmed prices" },
         ].map(t => (

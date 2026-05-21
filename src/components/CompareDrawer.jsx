@@ -1,5 +1,6 @@
 import CarImage from "./CarImage";
 import ColorSwatches from "./ColorSwatches";
+import { formatComfort } from "../data/comfortFeatures";
 
 const fmt = (n) => (n != null ? `$${Number(n).toLocaleString()}` : "—");
 
@@ -14,6 +15,9 @@ const rows = [
   { label: "Range", key: "range", fmt: (v) => `${v} km`, highlight: true },
   { label: "Drivetrain", key: "drivetrain", fmt: (v) => v },
   { label: "Sunroof", key: "sunroof", fmt: (v) => v === true ? "✓ Yes" : v === false ? "✗ No" : "?" },
+  { label: "Heated seats", key: "heatedSeats", fmt: (v, car) => formatComfort(v, car?.heatedSeatsDetail) },
+  { label: "Ventilated seats", key: "ventilatedSeats", fmt: (v, car) => formatComfort(v, car?.ventilatedSeatsDetail) },
+  { label: "Heated steering", key: "heatedSteeringWheel", fmt: (v) => formatComfort(v) },
   { label: "Seats", key: "seats", fmt: (v) => v ? `${v}` : "—" },
   { label: "Confirmed", key: "dataConfirmed", fmt: (v) => v ? "✓ Confirmed" : "Estimated" },
 ];
@@ -81,7 +85,7 @@ export default function CompareDrawer({ cars, onClose, onRemove }) {
                   <div key={car.id}
                     className={`px-4 py-3 ${row.highlight ? "bg-zinc-900" : "bg-zinc-950"} ${isBest ? "border-l-2 border-emerald-500" : ""}`}>
                     <p className={`text-sm font-medium ${isBest ? "text-emerald-400" : row.highlight ? "text-white" : "text-zinc-300"}`}>
-                      {row.fmt(val)}
+                      {row.fmt(val, car)}
                     </p>
                   </div>
                 );

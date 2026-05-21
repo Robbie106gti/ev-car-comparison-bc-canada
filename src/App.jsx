@@ -9,6 +9,7 @@ import FinanceCalculator from "./components/FinanceCalculator";
 export default function App() {
   const [filters, setFilters] = useState({
     make: "All", drivetrain: "All", sunroof: false,
+    heatedSeats: false, ventilatedSeats: false, heatedSteeringWheel: false,
     rebateOnly: false, confirmedOnly: false, maxMonthly: 1500, sortBy: "monthly",
   });
   const [compareList, setCompareList] = useState([]);
@@ -21,6 +22,9 @@ export default function App() {
     if (filters.make !== "All") list = list.filter(c => c.make === filters.make);
     if (filters.drivetrain !== "All") list = list.filter(c => c.drivetrain === filters.drivetrain);
     if (filters.sunroof) list = list.filter(c => c.sunroof === true);
+    if (filters.heatedSeats) list = list.filter(c => c.heatedSeats === true);
+    if (filters.ventilatedSeats) list = list.filter(c => c.ventilatedSeats === true);
+    if (filters.heatedSteeringWheel) list = list.filter(c => c.heatedSteeringWheel === true);
     if (filters.rebateOnly) list = list.filter(c => c.federalRebate > 0);
     if (filters.confirmedOnly) list = list.filter(c => c.dataConfirmed);
     if (filters.maxMonthly < 1500) list = list.filter(c => c.monthlyPayment && c.monthlyPayment <= filters.maxMonthly);
